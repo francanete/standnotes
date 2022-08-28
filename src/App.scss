@@ -1,6 +1,8 @@
+@import "./variables.scss";
+
 .App {
   color: var(--text-primary);
-  background-color: var(--background);
+  background-color: $background;
   padding: 20px;
   height: calc(100vh - 40px);
   font-size: large;
