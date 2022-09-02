@@ -1,7 +1,9 @@
 import useLocalStorage from "use-local-storage";
-import { QueryTest } from "./components/QueryTest";
+import { Home } from "./pages/Home";
 
 import "./App.scss";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { NoteProfile } from "./pages/NoteProfile";
 
 export const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -21,8 +23,12 @@ export const App = () => {
         Switch to {theme === "light" ? "Dark" : "Light"} Theme
       </button>
       <div className="Container">
-        <h1>StandNotes</h1>
-        <QueryTest />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/note/:noteId" element={<NoteProfile />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </div>
   );
