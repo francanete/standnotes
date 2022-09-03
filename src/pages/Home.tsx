@@ -1,6 +1,7 @@
 import { useNotesQuery } from "../queries/useNotesQuery";
 import { Loading } from "../components/Loading";
 import { Link } from "react-router-dom";
+import { NoteCreate } from "./ NoteCreate";
 
 export const Home = () => {
   const { data: notes, isLoading } = useNotesQuery();
@@ -16,6 +17,7 @@ export const Home = () => {
   return (
     <div>
       <h1>StandNotes</h1>
+      <NoteCreate />
       {notes.map((note) => (
         <div key={note._id}>
           <Link to={`/note/${note._id}`}>

@@ -4,6 +4,7 @@ import { Home } from "./pages/Home";
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NoteProfile } from "./pages/NoteProfile";
+import { NoteCreate } from "./pages/ NoteCreate";
 
 export const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -26,6 +27,7 @@ export const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/note/create" element={<NoteCreate />} />
             <Route path="/note/:noteId" element={<NoteProfile />} />
           </Routes>
         </BrowserRouter>

@@ -1,13 +1,13 @@
 type Tasks = {
-  _id: string;
+  _id?: string;
   titleTask: string;
   descriptionTask: string;
 };
 
 export interface INotes {
-  _id: string;
+  _id?: string;
   title: string;
-  date: Date;
-  description: number;
-  tasks: Tasks[];
+  date: string;
+  description: string;
+  tasks?: Tasks[];
 }
