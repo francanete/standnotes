@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useNoteQuery } from "../queries/useNoteQuery";
+import { AddTaskForm } from "../components/forms/AddTaskForm";
 
 export const NoteProfile = () => {
   const { noteId } = useParams();
@@ -19,6 +20,7 @@ export const NoteProfile = () => {
           <p>{task?.descriptionTask}</p>
         </div>
       ))}
+      <AddTaskForm />
     </>
   );
 };

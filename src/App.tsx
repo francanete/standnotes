@@ -4,7 +4,7 @@ import { Home } from "./pages/Home";
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NoteProfile } from "./pages/NoteProfile";
-import { NoteCreate } from "./pages/ NoteCreate";
+import { NoteCreate } from "./pages/NoteCreate";
 import { NavBar } from "./components/NavBar";
 
 export const App = () => {

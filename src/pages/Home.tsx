@@ -1,7 +1,7 @@
 import { useNotesQuery } from "../queries/useNotesQuery";
 import { Loading } from "../components/Loading";
 import { Link } from "react-router-dom";
-import { NoteCreate } from "./ NoteCreate";
+import { NoteCreate } from "./NoteCreate";
 import { formatDate } from "../utils/dateformatter";
 
 export const Home = () => {

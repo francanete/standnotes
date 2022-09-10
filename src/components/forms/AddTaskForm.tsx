@@ -1,10 +1,13 @@
-import { useNoteCreateMutation } from "../queries/useNoteCreateMutation";
-import { INotes, Tasks } from "../types/notes";
+// import { useNoteCreateMutation } from "../queries/useNoteCreateMutation";
+// import { INotes, Tasks } from "../types/notes";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import style from "./NoteCreate.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
+import { INotes } from "../../types/notes";
+
+import styles from "./AddTaskForm.module.scss";
 
 const initialValues = {
   title: "",
@@ -24,15 +27,17 @@ const validationSchema = Yup.object({
     .min(5, "Must be 5 characters or more"),
   description: Yup.string().required("Required"),
   date: Yup.string().required("Required"),
-  tasks: Yup.array().of(
-    Yup.object().shape({
-      titleTask: Yup.string().required("Required"),
-      descriptionTask: Yup.string().required("Required"),
-    })
-  ),
+  tasks: Yup.array()
+    .of(
+      Yup.object().shape({
+        titleTask: Yup.string().required("Required"),
+        descriptionTask: Yup.string().required("Required"),
+      })
+    )
+    .required("Required"),
 });
 
-export const NoteCreate = () => {
+export const AddTaskForm = () => {
   const { mutateAsync, isSuccess } = useNoteCreateMutation();
   const nav = useNavigate();
 
@@ -43,7 +48,6 @@ export const NoteCreate = () => {
 
   return (
     <>
-      <div>Enter a new StandNote</div>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -53,28 +57,25 @@ export const NoteCreate = () => {
         {(formik) => {
           return (
             <Form>
-              <div className={style["NoteCreate"]}>
-                <label htmlFor="title">Title</label>
+              <div className={styles["AddTaskForm"]}>
+                <label htmlFor="titleTask">Title</label>
                 <Field
-                  name="title"
-                  id="title"
-                  type="text"
-                  placeholder="Enter a title"
-                />
-                <ErrorMessage name="title" />
-                <label htmlFor="description">Description</label>
-                <Field
-                  as="textarea"
-                  name="description"
-                  id="description"
+                  id={`titleTtasks.titleTaskask`}
+                  name={`tasks.titleTask`}
                   type="text"
                 />
-                <ErrorMessage name="description" />
-                <label htmlFor="date">Date</label>
-                <Field name="date" id="date" type="date" />
-                <ErrorMessage name="date" />
+                <ErrorMessage name="tasks.titleTask" />
 
-                <div>
+                <label htmlFor="tasks.descriptionTask">Description</label>
+                <Field
+                  id={`tasks.descriptionTask`}
+                  name={`tasks.descriptionTask`}
+                  type="text"
+                  as="textarea"
+                />
+                <ErrorMessage name={`tasks.descriptionTask`} />
+
+                {/* <div>
                   <label htmlFor="titleTask">Add a task</label>
                   <FieldArray name="tasks">
                     {(fieldArrayProps) => {
@@ -114,9 +115,12 @@ export const NoteCreate = () => {
                       );
                     }}
                   </FieldArray>
-                </div>
+                </div> */}
 
-                <button type="submit" disabled={!formik.isValid}>
+                <button
+                  type="submit"
+                  disabled={!formik.isValid || formik.isSubmitting}
+                >
                   Create StandNote
                 </button>
               </div>
