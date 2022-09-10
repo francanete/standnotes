@@ -1,4 +1,4 @@
-type Tasks = {
+export type Tasks = {
   _id?: string;
   titleTask: string;
   descriptionTask: string;

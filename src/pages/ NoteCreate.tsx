@@ -1,89 +1,129 @@
-import React, { useState } from "react";
 import { useNoteCreateMutation } from "../queries/useNoteCreateMutation";
-import { INotes } from "../types/notes";
-import { useFormik } from "formik";
+import { INotes, Tasks } from "../types/notes";
+import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
+import * as Yup from "yup";
+
+import style from "./NoteCreate.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   title: "",
   description: "",
   date: "",
+  tasks: [
+    {
+      titleTask: "",
+      descriptionTask: "",
+    },
+  ],
 };
 
-const onSubmit = (values: INotes) => {
-  console.log("Form submitted", values);
-};
-
-const validate = (values: INotes) => {
-  const errors: Partial<INotes> = {};
-  if (!values.title) {
-    errors.title = "Required";
-  } else if (values.title.length < 5) {
-    errors.title = "Must be 5 characters or more";
-  }
-
-  if (!values.description) {
-    errors.description = "Required";
-  }
-  if (!values.date) {
-    errors.date = "Required";
-  }
-  return errors;
-};
+const validationSchema = Yup.object({
+  title: Yup.string()
+    .required("Required")
+    .min(5, "Must be 5 characters or more"),
+  description: Yup.string().required("Required"),
+  date: Yup.string().required("Required"),
+  tasks: Yup.array().of(
+    Yup.object().shape({
+      titleTask: Yup.string().required("Required"),
+      descriptionTask: Yup.string().required("Required"),
+    })
+  ),
+});
 
 export const NoteCreate = () => {
-  const formik = useFormik<INotes>({
-    initialValues,
-    onSubmit,
-    validate,
-  });
+  const { mutateAsync, isSuccess } = useNoteCreateMutation();
+  const nav = useNavigate();
 
-  const { mutateAsync } = useNoteCreateMutation();
-
-  const handleNoteCreate = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    // mutateAsync(formik.values);
-    console.log(formik.values);
+  const onSubmit = async (values: INotes) => {
+    const note = await mutateAsync(values);
+    nav(`/note/${note.data._id}`);
   };
-
-  console.log(formik.errors);
 
   return (
     <>
       <div>Enter a new StandNote</div>
-      <div>
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="title">Title</label>
-          <input
-            id="title"
-            type="text"
-            value={formik.values.title}
-            onChange={formik.handleChange}
-          />
-          {formik.errors.title ? <div>{formik.errors.title}</div> : null}
-          <label htmlFor="description">Description</label>
-          <input
-            id="description"
-            type="text"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-          />
-          {formik.errors.description ? (
-            <div>{formik.errors.description}</div>
-          ) : null}
-          <label htmlFor="date">Date</label>
-          <input
-            id="date"
-            type="date"
-            value={formik.values.date}
-            onChange={formik.handleChange}
-          />
-          {formik.errors.date ? <div>{formik.errors.date}</div> : null}
-          <button type="submit">Create StandNote</button>
-          {/* <button type="submit" onClick={handleNoteCreate}>
-            Create StandNote
-          </button> */}
-        </form>
-      </div>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+        validateOnMount
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <div className={style["NoteCreate"]}>
+                <label htmlFor="title">Title</label>
+                <Field
+                  name="title"
+                  id="title"
+                  type="text"
+                  placeholder="Enter a title"
+                />
+                <ErrorMessage name="title" />
+                <label htmlFor="description">Description</label>
+                <Field
+                  as="textarea"
+                  name="description"
+                  id="description"
+                  type="text"
+                />
+                <ErrorMessage name="description" />
+                <label htmlFor="date">Date</label>
+                <Field name="date" id="date" type="date" />
+                <ErrorMessage name="date" />
+
+                <div>
+                  <label htmlFor="titleTask">Add a task</label>
+                  <FieldArray name="tasks">
+                    {(fieldArrayProps) => {
+                      const { push, remove, form } = fieldArrayProps;
+                      const { values } = form;
+                      const { tasks } = values;
+                      return (
+                        <div>
+                          {tasks.map((_task: Tasks[], index: number) => (
+                            <div key={index}>
+                              <Field
+                                id={`tasks[${index}].titleTask`}
+                                name={`tasks[${index}].titleTask`}
+                                type="text"
+                                values={""}
+                              />
+                              <Field
+                                id={`tasks[${index}].descriptionTask`}
+                                name={`tasks[${index}].descriptionTask`}
+                                type="text"
+                                values={""}
+                              />
+                              {index > 0 && (
+                                <button
+                                  type="button"
+                                  onClick={() => remove(index)}
+                                >
+                                  -
+                                </button>
+                              )}
+                              <button type="button" onClick={() => push("")}>
+                                +
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    }}
+                  </FieldArray>
+                </div>
+
+                <button type="submit" disabled={!formik.isValid}>
+                  Create StandNote
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
     </>
   );
 };

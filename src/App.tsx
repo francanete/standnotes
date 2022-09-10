@@ -5,6 +5,7 @@ import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NoteProfile } from "./pages/NoteProfile";
 import { NoteCreate } from "./pages/ NoteCreate";
+import { NavBar } from "./components/NavBar";
 
 export const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -20,11 +21,9 @@ export const App = () => {
 
   return (
     <div className="App" data-theme={theme}>
-      <button onClick={switchTheme}>
-        Switch to {theme === "light" ? "Dark" : "Light"} Theme
-      </button>
       <div className="Container">
         <BrowserRouter>
+          <NavBar theme={theme} switchTheme={switchTheme} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/note/create" element={<NoteCreate />} />

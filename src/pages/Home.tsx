@@ -18,7 +18,6 @@ export const Home = () => {
   return (
     <div>
       <h1>StandNotes</h1>
-      <NoteCreate />
       {notes.map((note) => (
         <div key={note._id}>
           <Link to={`/note/${note._id}`}>
