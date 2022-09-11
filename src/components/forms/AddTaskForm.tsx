@@ -1,18 +1,11 @@
-// import { useNoteCreateMutation } from "../queries/useNoteCreateMutation";
-// import { INotes, Tasks } from "../types/notes";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
-
-import { useNavigate } from "react-router-dom";
-import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
-import { INotes } from "../../types/notes";
+import { INotes, Tasks } from "../../types/notes";
+import { useTaskCreateMutation } from "../../queries/useTaskCreateMutation";
 
 import styles from "./AddTaskForm.module.scss";
 
 const initialValues = {
-  title: "",
-  description: "",
-  date: "",
   tasks: [
     {
       titleTask: "",
@@ -22,28 +15,19 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  title: Yup.string()
-    .required("Required")
-    .min(5, "Must be 5 characters or more"),
-  description: Yup.string().required("Required"),
-  date: Yup.string().required("Required"),
-  tasks: Yup.array()
-    .of(
-      Yup.object().shape({
-        titleTask: Yup.string().required("Required"),
-        descriptionTask: Yup.string().required("Required"),
-      })
-    )
-    .required("Required"),
+  tasks: Yup.array().of(
+    Yup.object().shape({
+      titleTask: Yup.string().required("Required"),
+      descriptionTask: Yup.string().required("Required"),
+    })
+  ),
 });
 
-export const AddTaskForm = () => {
-  const { mutateAsync, isSuccess } = useNoteCreateMutation();
-  const nav = useNavigate();
+export const AddTaskForm = ({ noteId }: { noteId: string }) => {
+  const { mutateAsync } = useTaskCreateMutation(noteId);
 
-  const onSubmit = async (values: INotes) => {
-    const note = await mutateAsync(values);
-    nav(`/note/${note.data._id}`);
+  const onSubmit = async (values: Partial<INotes>) => {
+    const tasks = await mutateAsync(values);
   };
 
   return (
@@ -52,34 +36,16 @@ export const AddTaskForm = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
-        validateOnMount
       >
         {(formik) => {
           return (
             <Form>
               <div className={styles["AddTaskForm"]}>
-                <label htmlFor="titleTask">Title</label>
-                <Field
-                  id={`titleTtasks.titleTaskask`}
-                  name={`tasks.titleTask`}
-                  type="text"
-                />
-                <ErrorMessage name="tasks.titleTask" />
-
-                <label htmlFor="tasks.descriptionTask">Description</label>
-                <Field
-                  id={`tasks.descriptionTask`}
-                  name={`tasks.descriptionTask`}
-                  type="text"
-                  as="textarea"
-                />
-                <ErrorMessage name={`tasks.descriptionTask`} />
-
-                {/* <div>
+                <div>
                   <label htmlFor="titleTask">Add a task</label>
                   <FieldArray name="tasks">
                     {(fieldArrayProps) => {
-                      const { push, remove, form } = fieldArrayProps;
+                      const { form } = fieldArrayProps;
                       const { values } = form;
                       const { tasks } = values;
                       return (
@@ -91,38 +57,32 @@ export const AddTaskForm = () => {
                                 name={`tasks[${index}].titleTask`}
                                 type="text"
                                 values={""}
+                                placeholder="Enter a title"
                               />
+                              <ErrorMessage
+                                name={`tasks[${index}].titleTask`}
+                              />
+
                               <Field
                                 id={`tasks[${index}].descriptionTask`}
                                 name={`tasks[${index}].descriptionTask`}
                                 type="text"
+                                as="textarea"
                                 values={""}
+                                placeholder="Enter a description"
                               />
-                              {index > 0 && (
-                                <button
-                                  type="button"
-                                  onClick={() => remove(index)}
-                                >
-                                  -
-                                </button>
-                              )}
-                              <button type="button" onClick={() => push("")}>
-                                +
-                              </button>
+                              <ErrorMessage
+                                name={`tasks[${index}].descriptionTask`}
+                              />
                             </div>
                           ))}
                         </div>
                       );
                     }}
                   </FieldArray>
-                </div> */}
+                </div>
 
-                <button
-                  type="submit"
-                  disabled={!formik.isValid || formik.isSubmitting}
-                >
-                  Create StandNote
-                </button>
+                <button type="submit">Create Task</button>
               </div>
             </Form>
           );

@@ -1,7 +1,6 @@
 import { useNotesQuery } from "../queries/useNotesQuery";
 import { Loading } from "../components/Loading";
 import { Link } from "react-router-dom";
-import { NoteCreate } from "./NoteCreate";
 import { formatDate } from "../utils/dateformatter";
 
 export const Home = () => {
@@ -11,8 +10,8 @@ export const Home = () => {
     return <Loading />;
   }
 
-  if (!notes) {
-    return null;
+  if (!notes || notes.length === 0) {
+    return <div>No notes found, enter your first StandNote.</div>;
   }
 
   return (
