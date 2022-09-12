@@ -23,7 +23,13 @@ const validationSchema = Yup.object({
   ),
 });
 
-export const AddTaskForm = ({ noteId }: { noteId: string }) => {
+export const AddTaskForm = ({
+  noteId,
+  currentValues,
+}: {
+  noteId: string;
+  currentValues?: Tasks;
+}) => {
   const { mutateAsync } = useTaskCreateMutation(noteId);
 
   const onSubmit = async (values: Partial<INotes>) => {
