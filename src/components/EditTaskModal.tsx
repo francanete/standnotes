@@ -1,5 +1,5 @@
 import { Tasks } from "../types/notes";
-import { AddTaskForm } from "./forms/AddTaskForm";
+import { UpdateTaskForm } from "./forms/UpdateTaskForm";
 import { Modal, ModalProps } from "./Modal";
 
 interface IEditTaskModal extends Omit<ModalProps, "children"> {
@@ -7,6 +7,7 @@ interface IEditTaskModal extends Omit<ModalProps, "children"> {
   noteId: string;
   taskIndex: number;
   tasks: Tasks[];
+  setOpen: (open: boolean) => void;
 }
 
 export const EditTaskModal = ({
@@ -17,6 +18,7 @@ export const EditTaskModal = ({
   noteId,
   taskIndex,
   tasks,
+  setOpen,
 }: IEditTaskModal) => {
   return (
     <Modal title={title} onClose={onClose} isOpen={isOpen}>
@@ -25,7 +27,7 @@ export const EditTaskModal = ({
        * noteId
        * incitialValues
        */}
-      <AddTaskForm noteId={noteId} />
+      <UpdateTaskForm setOpen={setOpen} taskId={taskId!} />
     </Modal>
   );
 };

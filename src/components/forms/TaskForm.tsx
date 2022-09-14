@@ -20,16 +20,13 @@ export const initialValuesSchema = {
   ],
 };
 
-const validationSchema = Yup.object({
-  tasks: Yup.array().of(
-    Yup.object().shape({
-      titleTask: Yup.string().required("Required"),
-      descriptionTask: Yup.string().required("Required"),
-    })
-  ),
-});
+const validationSchema = Yup.object({});
 
-const TaskFields = ({ errors, isSubmitting }: FormikProps<Partial<INotes>>) => {
+const TaskFields = ({
+  errors,
+  isSubmitting,
+  initialValues,
+}: FormikProps<Partial<INotes>>) => {
   return (
     <Form>
       <div className={styles["TaskForm"]}>
@@ -77,34 +74,22 @@ const TaskFields = ({ errors, isSubmitting }: FormikProps<Partial<INotes>>) => {
 };
 
 export const TaskForm = ({
-  // noteId,
-  // currentValues,
   onSubmit,
   initialValues,
 }: {
   onSubmit: (values: Partial<INotes>) => void;
-  initialValues?: Partial<INotes>;
-}) =>
-  // {
-  // noteId: string;
-  // currentValues?: Tasks;
-  // }
-  {
-    // const { mutateAsync } = useTaskCreateMutation(noteId);
-
-    // const onSubmit = async (values: Partial<INotes>) => {
-    //   const tasks = await mutateAsync(values);
-    // };
-
-    return (
-      <>
-        <Formik
-          initialValues={initialValuesSchema}
-          onSubmit={onSubmit}
-          validationSchema={validationSchema}
-        >
-          {TaskFields}
-        </Formik>
-      </>
-    );
-  };
+  initialValues: typeof initialValuesSchema;
+  validationSchema: typeof validationSchema;
+}) => {
+  return (
+    <>
+      <Formik
+        initialValues={initialValuesSchema}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {TaskFields}
+      </Formik>
+    </>
+  );
+};

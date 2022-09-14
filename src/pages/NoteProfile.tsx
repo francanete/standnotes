@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useNoteQuery } from "../queries/useNoteQuery";
-import { AddTaskForm } from "../components/forms/AddTaskForm";
+import { CreateTaskForm } from "../components/forms/CreateTaskForm";
 import { formatDate } from "../utils/dateformatter";
 import { useNoteDeleteMutation } from "../queries/useNoteDeleteMutation";
 import { Loading } from "../components/Loading";
@@ -29,7 +29,7 @@ export const NoteProfile = () => {
       <p>{note.description}</p>
       <span>{formatDate(note.date)}</span>
       {note.tasks?.length === 0 ? <p>No tasks</p> : <TasksList note={note} />}
-      <AddTaskForm noteId={noteId} />
+      <CreateTaskForm noteId={noteId} />
     </>
   );
 };
