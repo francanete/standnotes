@@ -29,8 +29,8 @@ export const UpdateTaskForm = ({
   const currentValues = {
     tasks: [
       {
-        titleTask: task.titleTask!,
-        descriptionTask: task.descriptionTask!,
+        titleTask: task.titleTask,
+        descriptionTask: task.descriptionTask,
       },
     ],
   };

@@ -14,6 +14,7 @@ export const TasksList = ({ note }: { note: INotes }) => {
     setTaskIndex(index);
     setTaskId(taskId!);
   };
+
   return (
     <>
       {note?.tasks?.map((task, index) => (
