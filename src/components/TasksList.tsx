@@ -26,16 +26,18 @@ export const TasksList = ({ note }: { note: INotes }) => {
           </button>
         </div>
       ))}
-      <EditTaskModal
-        title="Update Task"
-        onClose={() => setIsOpen(false)}
-        isOpen={isOpen}
-        noteId={note?._id!}
-        taskIndex={taskIndex}
-        tasks={note?.tasks!}
-        taskId={taskId}
-        setOpen={setIsOpen}
-      />
+      {note.tasks && (
+        <EditTaskModal
+          title="Update Task"
+          onClose={() => setIsOpen(false)}
+          isOpen={isOpen}
+          noteId={note?._id!}
+          taskIndex={taskIndex}
+          tasks={note?.tasks}
+          taskId={taskId}
+          setOpen={setIsOpen}
+        />
+      )}
     </>
   );
 };

@@ -3,7 +3,7 @@ import { UpdateTaskForm } from "./forms/UpdateTaskForm";
 import { Modal, ModalProps } from "./Modal";
 
 interface IEditTaskModal extends Omit<ModalProps, "children"> {
-  taskId?: string;
+  taskId: string;
   noteId: string;
   taskIndex: number;
   tasks: Tasks[];
@@ -27,7 +27,7 @@ export const EditTaskModal = ({
        * noteId
        * incitialValues
        */}
-      <UpdateTaskForm setOpen={setOpen} taskId={taskId!} />
+      <UpdateTaskForm setOpen={setOpen} taskId={tasks[taskIndex]._id!} />
     </Modal>
   );
 };

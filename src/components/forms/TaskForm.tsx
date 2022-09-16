@@ -84,7 +84,7 @@ export const TaskForm = ({
   return (
     <>
       <Formik
-        initialValues={initialValuesSchema}
+        initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
