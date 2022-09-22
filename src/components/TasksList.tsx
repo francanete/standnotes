@@ -7,12 +7,12 @@ export const TasksList = ({ note }: { note: INotes }) => {
   const { mutateAsync: deleteTask } = useTaskDeleteMutation(note._id!);
   const [isOpen, setIsOpen] = useState(false);
   const [taskIndex, setTaskIndex] = useState(0);
-  const [taskId, setTaskId] = useState("");
+  const [taskId, setTaskId] = useState<string>();
 
   const handleEditTask = (taskId: string | undefined, index: number) => {
     setIsOpen(true);
     setTaskIndex(index);
-    setTaskId(taskId!);
+    setTaskId(taskId);
   };
 
   return (
@@ -27,14 +27,14 @@ export const TasksList = ({ note }: { note: INotes }) => {
           </button>
         </div>
       ))}
-      {note.tasks && (
+      {note.tasks && taskId && (
         <EditTaskModal
           title="Update Task"
           onClose={() => setIsOpen(false)}
           isOpen={isOpen}
-          noteId={note?._id!}
+          noteId={note._id!}
           taskIndex={taskIndex}
-          tasks={note?.tasks}
+          tasks={note.tasks}
           taskId={taskId}
           setOpen={setIsOpen}
         />
