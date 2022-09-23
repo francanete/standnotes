@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NoteProfile } from "./pages/NoteProfile";
 import { NoteCreate } from "./pages/NoteCreate";
 import { NavBar } from "./components/NavBar";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
 
 export const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -26,6 +28,8 @@ export const App = () => {
           <NavBar theme={theme} switchTheme={switchTheme} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/note/create" element={<NoteCreate />} />
             <Route path="/note/:noteId" element={<NoteProfile />} />
           </Routes>

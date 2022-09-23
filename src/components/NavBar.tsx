@@ -16,6 +16,14 @@ export const NavBar = ({
       name: "Create",
       path: "/note/create",
     },
+    {
+      name: "Login",
+      path: "/login",
+    },
+    {
+      name: "Signup",
+      path: "/signup",
+    },
   ];
 
   return (
