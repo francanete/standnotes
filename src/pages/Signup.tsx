@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { Field, Form, Formik } from "formik";
 import { IUser } from "../types/user";
+import { useSignup } from "../hooks/useSignup";
 
 const initialValues = {
   email: "",
   password: "",
 };
 
-const onSubmit = async (values: IUser) => {
-  console.log(values.email, values.password);
-};
-
 export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signup, error, isLoading } = useSignup();
+
+  const onSubmit = async (values: IUser) => {
+    await signup(values);
+  };
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -32,7 +34,10 @@ export const Signup = () => {
           type="password"
           placeholder="Enter your password"
         />
-        <button type="submit">Sign Up</button>
+        <button disabled={isLoading as boolean} type="submit">
+          Sign Up
+        </button>
+        {error && <div>{error}</div>}
       </Form>
     </Formik>
   );
