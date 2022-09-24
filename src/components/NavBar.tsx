@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
-import { Button } from "./Button";
+import { useAuthContext } from "../hooks/useAuthContext";
 import styles from "./NavBar.module.scss";
 
 export const NavBar = ({
@@ -11,6 +11,7 @@ export const NavBar = ({
   switchTheme: () => void;
 }) => {
   const { logout } = useLogout();
+  const { user } = useAuthContext();
 
   const menuItems = [
     {
@@ -38,17 +39,22 @@ export const NavBar = ({
   return (
     <div className={styles["NavBar"]}>
       <nav>
-        <ul className={styles["NavBar__menu"]}>
-          {menuItems.map((item) => (
-            <li key={item.path}>
-              <Link to={item.path}>{item.name}</Link>
-            </li>
-          ))}
-        </ul>
+        {!user && (
+          <ul className={styles["NavBar__menu"]}>
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <Link to={item.path}>{item.name}</Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </nav>
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
+      {user && (
+        <div>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      )}
+
       <button onClick={switchTheme}>
         {theme === "light" ? "Dark" : "Light"}
       </button>
