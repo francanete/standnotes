@@ -5,6 +5,7 @@ import { App } from "./App";
 
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -13,9 +14,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <AuthContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
