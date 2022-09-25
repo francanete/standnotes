@@ -22,14 +22,6 @@ export const NavBar = ({
       name: "Create",
       path: "/note/create",
     },
-    {
-      name: "Login",
-      path: "/login",
-    },
-    {
-      name: "Signup",
-      path: "/signup",
-    },
   ];
 
   const handleLogout = () => {
@@ -37,27 +29,33 @@ export const NavBar = ({
   };
 
   return (
-    <div className={styles["NavBar"]}>
-      <nav>
-        {!user && (
-          <ul className={styles["NavBar__menu"]}>
-            {menuItems.map((item) => (
-              <li key={item.path}>
-                <Link to={item.path}>{item.name}</Link>
-              </li>
-            ))}
-          </ul>
+    <>
+      <div className={styles["NavBar"]}>
+        <nav>
+          {user && (
+            <ul className={styles["NavBar__menu"]}>
+              {menuItems.map((item) => (
+                <li key={item.path}>
+                  <Link to={item.path}>{item.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </nav>
+        {user && (
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
         )}
-      </nav>
-      {user && (
-        <div>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      )}
 
-      <button onClick={switchTheme}>
-        {theme === "light" ? "Dark" : "Light"}
-      </button>
-    </div>
+        <button onClick={switchTheme}>
+          {theme === "light" ? "Dark" : "Light"}
+        </button>
+      </div>
+      <div>
+        {" "}
+        <span>{user && user.email}</span>
+      </div>
+    </>
   );
 };
