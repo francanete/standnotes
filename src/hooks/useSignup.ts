@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { IUser } from "../types/user";
 import { useAuthContext } from "./useAuthContext";
