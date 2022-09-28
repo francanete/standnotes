@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import styles from "./NavBar.module.scss";
+import { Logo } from "./logo";
 
 export const NavBar = ({
   theme,
@@ -30,6 +31,7 @@ export const NavBar = ({
 
   return (
     <>
+      <Logo />
       <div className={styles["NavBar"]}>
         <nav>
           {user && (

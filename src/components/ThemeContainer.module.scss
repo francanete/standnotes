@@ -1,12 +1,12 @@
-@import "./variables.scss";
+@import "../variables.scss";
 
-.App {
+.ThemeComtainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   color: var(--text-primary);
   background-color: $background;
   min-height: 100vh;
-  font-size: large;
-  font-weight: bold;
-  transition: all 0.5s;
 
   a {
     color: var(--text-primary);
