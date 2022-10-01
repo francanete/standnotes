@@ -10,7 +10,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // margin-left: auto;
     gap: 30px;
     list-style-type: none;
+    ul {
+      list-style-type: none;
+    }
+  }
+  &__access {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 10px;
+    margin-right: 20px;
+  }
+  &__theme {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
   }
 }

@@ -21,6 +21,8 @@ code {
   --text-primary: #0f172a;
   --text-secondary: royalblue;
   --accent: purple;
+  --button-background: #0f172a;
+  --button-text: white;
 }
 
 [data-theme="dark"] {
@@ -28,4 +30,6 @@ code {
   --text-primary: rgb(237, 237, 237);
   --text-secondary: grey;
   --accent: darkred;
+  --button-background: white;
+  --button-text: #0f172a;
 }

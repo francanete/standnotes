@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
-import styles from "./NavBar.module.scss";
 import { Logo } from "./logo";
+import { Button } from "./Button";
+import Moon from "../components/icons/Moon";
+import Bulb from "./icons/Bulb";
+
+import styles from "./NavBar.module.scss";
 
 export const NavBar = ({
   theme,
@@ -16,10 +20,6 @@ export const NavBar = ({
 
   const menuItems = [
     {
-      name: "Home",
-      path: "/",
-    },
-    {
       name: "Create",
       path: "/note/create",
     },
@@ -30,34 +30,35 @@ export const NavBar = ({
   };
 
   return (
-    <>
-      <Logo />
-      <div className={styles["NavBar"]}>
-        <nav>
-          {user && (
-            <ul className={styles["NavBar__menu"]}>
-              {menuItems.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path}>{item.name}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className={styles["NavBar"]}>
+      <Link to={"/"}>
+        <Logo color={theme === "light" ? "#000" : "#fff"} />
+      </Link>
+      {user && (
+        <nav className={styles["NavBar__menu"]}>
+          <ul>
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <Link to={item.path}>{item.name}</Link>
+              </li>
+            ))}
+          </ul>
         </nav>
-        {user && (
-          <div>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
+      )}
+      <div className={styles["NavBar__access"]}>
+        {user ? (
+          <>
+            <span>{user && user.email}</span>
+            <Button onClick={handleLogout}>Logout</Button>
+          </>
+        ) : (
+          <Button>Login</Button>
         )}
+      </div>
 
-        <button onClick={switchTheme}>
-          {theme === "light" ? "Dark" : "Light"}
-        </button>
-      </div>
-      <div>
-        {" "}
-        <span>{user && user.email}</span>
-      </div>
-    </>
+      <button onClick={switchTheme} className={styles["NavBar__theme"]}>
+        {theme === "light" ? <Moon /> : <Bulb />}
+      </button>
+    </div>
   );
 };
