@@ -1,0 +1,32 @@
+@import "../variables.scss";
+
+.Home {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+
+  @media (max-width: 945px) {
+    grid-template-columns: repeat(1, minmax(300px, 1fr));
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: rgba(204, 204, 204, 0.04);
+    border-radius: 9px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transform: translateY(-3px);
+    }
+  }
+  &__badge {
+    margin-left: auto;
+  }
+}

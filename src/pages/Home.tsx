@@ -3,6 +3,10 @@ import { Loading } from "../components/Loading";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utils/dateformatter";
 
+import { Badge } from "../components/Badge";
+import styles from "./Home.module.scss";
+import { Heading } from "../components/Heading";
+
 export const Home = () => {
   const { data: notes, isLoading } = useNotesQuery();
 
@@ -17,14 +21,25 @@ export const Home = () => {
   return (
     <div>
       <h1>StandNotes</h1>
-      {notes.map((note) => (
-        <div key={note._id}>
+      <div className={styles["Home"]}>
+        {notes.map((note) => (
           <Link to={`/note/${note._id}`}>
-            <h2>{note.title}</h2>
-            <p>{formatDate(note.date)}</p>
+            <div key={note._id} className={styles["Home__card"]}>
+              <Badge
+                className={styles["Home__badge"]}
+                content={
+                  note.tasks?.length === 1
+                    ? `${note.tasks?.length} task`
+                    : `${note.tasks?.length} tasks`
+                }
+              />
+              <Heading level={2}>{note.title}</Heading>
+              <span>{formatDate(note.date)}</span>
+              <p>{note.description}</p>
+            </div>
           </Link>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
