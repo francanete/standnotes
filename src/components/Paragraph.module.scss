@@ -1,0 +1,9 @@
+@import "../variables.scss";
+
+.Paragraph {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+}

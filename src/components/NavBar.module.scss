@@ -10,7 +10,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // margin-left: auto;
     gap: 30px;
     list-style-type: none;
     ul {
@@ -23,6 +22,11 @@
     margin-left: auto;
     gap: 10px;
     margin-right: 20px;
+    &--email {
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
   }
   &__theme {
     background: none;
@@ -30,5 +34,8 @@
     padding: 0;
     cursor: pointer;
     outline: inherit;
+  }
+  &__secondary {
+    padding: 20px;
   }
 }
