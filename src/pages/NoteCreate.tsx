@@ -1,13 +1,13 @@
-import React from "react";
 import { CreateNoteForm } from "../components/forms/CreateNoteForm";
-import { OldNoteCreate } from "../legacy/OldNoteCreateForm";
+import { Heading } from "../components/Heading";
+
+import styles from "./NoteCreate.module.scss";
 
 export const NoteCreate = () => {
   return (
-    <div>
-      <h1>Create a new StandNote</h1>
+    <div className={styles["NoteCreate"]}>
+      <Heading level={1}>Create a new StandNote</Heading>
       <CreateNoteForm />
-      {/* <OldNoteCreate /> */}
     </div>
   );
 };

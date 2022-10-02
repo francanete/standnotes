@@ -1,9 +1,10 @@
-import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-
 import { useNavigate } from "react-router-dom";
 import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
-import { INotes, Tasks } from "../../types/notes";
+import { INotes } from "../../types/notes";
+import { FieldInput } from "../FieldInput";
+import { Button } from "../Button";
 
 import styles from "./CreateNoteForm.module.scss";
 
@@ -44,7 +45,6 @@ export const CreateNoteForm = () => {
 
   return (
     <>
-      <div>Enter a new StandNote</div>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -55,32 +55,36 @@ export const CreateNoteForm = () => {
           return (
             <Form>
               <div className={styles["CreateNoteForm"]}>
-                <label htmlFor="title">Title</label>
-                <Field
+                <FieldInput
                   name="title"
+                  label="Title"
                   id="title"
                   type="text"
                   placeholder="Enter a title"
                 />
-                <ErrorMessage name="title" />
-                <label htmlFor="description">Description</label>
-                <Field
-                  as="textarea"
+                <FieldInput
                   name="description"
+                  label="Description"
                   id="description"
                   type="text"
+                  as="textarea"
+                  placeholder="Enter a description"
                 />
-                <ErrorMessage name="description" />
-                <label htmlFor="date">Date</label>
-                <Field name="date" id="date" type="date" />
-                <ErrorMessage name="date" />
 
-                <button
+                <FieldInput
+                  name="date"
+                  label="Date"
+                  id="date"
+                  type="date"
+                  placeholder="Enter a date"
+                />
+
+                <Button
                   type="submit"
                   disabled={!formik.isValid || formik.isSubmitting}
                 >
                   Create StandNote
-                </button>
+                </Button>
               </div>
             </Form>
           );

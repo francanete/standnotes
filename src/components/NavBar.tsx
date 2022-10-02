@@ -75,10 +75,12 @@ export const NavBar = ({
       </div>
       {user && (
         <div className={styles["NavBar__secondary"]}>
-          <Button>
-            <FaPlus />
-            StandNote
-          </Button>
+          <Link to={"/note/create"}>
+            <Button>
+              <FaPlus />
+              StandNote
+            </Button>
+          </Link>
         </div>
       )}
     </>

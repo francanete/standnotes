@@ -1,13 +1,13 @@
 @import "../variables.scss";
 
-.Home {
+.NotesGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
   grid-gap: 1rem;
   justify-content: center;
   padding: 1rem;
 
-  @media (max-width: 945px) {
+  @media (max-width: 800px) {
     grid-template-columns: repeat(1, minmax(300px, 1fr));
   }
 

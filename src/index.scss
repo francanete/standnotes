@@ -19,6 +19,7 @@ code {
 :root {
   --background: white;
   --text-primary: #0f172a;
+  --text-error: #ff0000;
   --text-secondary: royalblue;
   --accent: purple;
   --button-background: #0f172a;
@@ -28,6 +29,7 @@ code {
 [data-theme="dark"] {
   --background: #0f172a;
   --text-primary: rgb(237, 237, 237);
+  --text-error: #e80505f6;
   --text-secondary: grey;
   --accent: darkred;
   --button-background: white;
