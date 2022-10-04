@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
@@ -7,6 +7,9 @@ import { FieldInput } from "../FieldInput";
 import { Button } from "../Button";
 
 import styles from "./CreateNoteForm.module.scss";
+import { TextEditor } from "../TextEditor";
+import { initialValuesSchema } from "./TaskForm";
+import { Label } from "../Label";
 
 const initialValues = {
   title: "",
@@ -62,13 +65,20 @@ export const CreateNoteForm = () => {
                   type="text"
                   placeholder="Enter a title"
                 />
-                <FieldInput
+                {/* <FieldInput
                   name="description"
                   label="Description"
                   id="description"
                   type="text"
                   as="textarea"
                   placeholder="Enter a description"
+                /> */}
+                <Label htmlFor="description">Description</Label>
+                <TextEditor
+                  value={formik.values.description}
+                  setFieldValue={(val) =>
+                    formik.setFieldValue("description", val)
+                  }
                 />
 
                 <FieldInput

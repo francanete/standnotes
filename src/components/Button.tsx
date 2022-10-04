@@ -4,9 +4,9 @@ import styles from "./Button.module.scss";
 
 interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export const Button = ({ children, onClick }: IButton) => {
+export const Button = ({ children, onClick, ...props }: IButton) => {
   return (
-    <button onClick={onClick} className={styles["Button"]}>
+    <button type={props.type} onClick={onClick} className={styles["Button"]}>
       {children}
     </button>
   );
