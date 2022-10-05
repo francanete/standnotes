@@ -5,6 +5,9 @@ import { formatDate } from "../utils/dateformatter";
 import { useNoteDeleteMutation } from "../queries/useNoteDeleteMutation";
 import { Loading } from "../components/Loading";
 import { TasksList } from "../components/TasksList";
+import DOMPurify from "dompurify";
+
+import styles from "./NoteProfile.module.scss";
 
 export const NoteProfile = () => {
   const { noteId } = useParams();
@@ -21,15 +24,27 @@ export const NoteProfile = () => {
     nav("/");
   };
 
+  const createMarkup = (html: string) => {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  };
+
   return (
-    <>
-      <div>NoteProfile</div>
-      <h1>{note.title}</h1>
+    <div className={styles["NoteProfile"]}>
+      <div className={styles["NoteProfile__header"]}>
+        <h1>{note.title}</h1>
+        <p>{formatDate(note.date)}</p>
+      </div>
       <button onClick={handleDeleteNote}>Delete</button>
-      <p>{note.description}</p>
-      <span>{formatDate(note.date)}</span>
+
+      <div
+        className={styles["NoteProfile__description"]}
+        dangerouslySetInnerHTML={createMarkup(note.description)}
+      />
+
       {note.tasks?.length === 0 ? <p>No tasks</p> : <TasksList note={note} />}
       <CreateTaskForm noteId={noteId} />
-    </>
+    </div>
   );
 };

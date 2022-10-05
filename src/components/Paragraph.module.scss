@@ -6,4 +6,12 @@
   white-space: nowrap;
   display: inline-block;
   max-width: 100%;
+
+  &--bold {
+    font-weight: bold;
+  }
+
+  &--small {
+    font-size: 12px;
+  }
 }

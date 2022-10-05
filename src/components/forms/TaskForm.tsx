@@ -10,6 +10,9 @@ import * as Yup from "yup";
 import { INotes, Tasks } from "../../types/notes";
 
 import styles from "./TaskForm.module.scss";
+import { FieldInput } from "../FieldInput";
+import { Label } from "../Label";
+import { TextEditor } from "../TextEditor";
 
 export const initialValuesSchema = {
   tasks: [
@@ -37,20 +40,41 @@ const TaskFields = ({
               const { form } = fieldArrayProps;
               const { values } = form;
               const { tasks } = values;
+
               return (
                 <div>
+                  <button type="submit">Create Task</button>
                   {tasks.map((_task: Tasks[], index: number) => (
                     <div key={index}>
-                      <Field
+                      {/* <Field
                         id={`tasks[${index}].titleTask`}
                         name={`tasks[${index}].titleTask`}
                         type="text"
                         values={""}
                         placeholder="Enter a title"
                       />
-                      <ErrorMessage name={`tasks[${index}].titleTask`} />
+                      <ErrorMessage name={`tasks[${index}].titleTask`} /> */}
 
-                      <Field
+                      <FieldInput
+                        label="Task title"
+                        name={`tasks[${index}].titleTask`}
+                      />
+
+                      <Label htmlFor="description">Description</Label>
+                      <TextEditor
+                        value={values.tasks[index].descriptionTask}
+                        // setFieldValue={(val) =>
+                        //  setFieldValue("description", val)
+                        // }
+                        setFieldValue={(val) =>
+                          form.setFieldValue(
+                            `tasks[${index}].descriptionTask`,
+                            val
+                          )
+                        }
+                      />
+
+                      {/* <Field
                         id={`tasks[${index}].descriptionTask`}
                         name={`tasks[${index}].descriptionTask`}
                         type="text"
@@ -58,7 +82,7 @@ const TaskFields = ({
                         values={""}
                         placeholder="Enter a description"
                       />
-                      <ErrorMessage name={`tasks[${index}].descriptionTask`} />
+                      <ErrorMessage name={`tasks[${index}].descriptionTask`} /> */}
                     </div>
                   ))}
                 </div>
@@ -66,8 +90,6 @@ const TaskFields = ({
             }}
           </FieldArray>
         </div>
-
-        <button type="submit">Create Task</button>
       </div>
     </Form>
   );

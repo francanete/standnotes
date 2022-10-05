@@ -1,0 +1,23 @@
+.NoteProfile {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 20px;
+  min-width: 560px;
+  height: 100%;
+  margin-bottom: 80px;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+  }
+
+  &__description {
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e06f;
+    // background-color: #fff;
+  }
+}

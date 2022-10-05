@@ -65,14 +65,6 @@ export const CreateNoteForm = () => {
                   type="text"
                   placeholder="Enter a title"
                 />
-                {/* <FieldInput
-                  name="description"
-                  label="Description"
-                  id="description"
-                  type="text"
-                  as="textarea"
-                  placeholder="Enter a description"
-                /> */}
                 <Label htmlFor="description">Description</Label>
                 <TextEditor
                   value={formik.values.description}
