@@ -9,6 +9,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiEditAlt } from "react-icons/bi";
 
 import styles from "./TasksList.module.scss";
+import { ConfirmationModal } from "./ConfirmationModal";
 
 export const TasksList = ({ note }: { note: INotes }) => {
   const { mutateAsync: deleteTask } = useTaskDeleteMutation(note._id!);
@@ -38,7 +39,9 @@ export const TasksList = ({ note }: { note: INotes }) => {
               <div className={styles["TasksList__actions"]}>
                 <button
                   className={styles["TasksList__actionButton"]}
-                  onClick={() => deleteTask(task._id!)}
+                  onClick={() => {
+                    deleteTask(task._id!);
+                  }}
                 >
                   <RiDeleteBin6Line size={18} color="#ff7b73" />
                 </button>
@@ -57,6 +60,7 @@ export const TasksList = ({ note }: { note: INotes }) => {
           </div>
         </>
       ))}
+
       {note.tasks && taskId && (
         <EditTaskModal
           title="Update Task"

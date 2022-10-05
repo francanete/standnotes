@@ -23,10 +23,6 @@ export const EditTaskModal = ({
   return (
     <Modal title={title} onClose={onClose} isOpen={isOpen}>
       {<span>{tasks[taskIndex].titleTask}</span>}
-      {/* I will need to pass:
-       * noteId
-       * incitialValues
-       */}
       <UpdateTaskForm setOpen={setOpen} taskId={tasks[taskIndex]._id!} />
     </Modal>
   );
