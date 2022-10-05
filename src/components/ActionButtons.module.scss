@@ -1,0 +1,11 @@
+.ActionButtons {
+  gap: 20px;
+  margin-left: auto;
+  bottom: 150px;
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}

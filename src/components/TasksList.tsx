@@ -5,11 +5,8 @@ import { EditTaskModal } from "./EditTaskModal";
 import DOMPurify from "dompurify";
 import { Paragraph } from "./Paragraph";
 
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { BiEditAlt } from "react-icons/bi";
-
 import styles from "./TasksList.module.scss";
-import { ConfirmationModal } from "./ConfirmationModal";
+import { ActionButtons } from "./ActionButtons";
 
 export const TasksList = ({ note }: { note: INotes }) => {
   const { mutateAsync: deleteTask } = useTaskDeleteMutation(note._id!);
@@ -36,22 +33,10 @@ export const TasksList = ({ note }: { note: INotes }) => {
           <div key={task._id} className={styles["TasksList"]}>
             <div className={styles["TasksList__header"]}>
               <Paragraph bold>{task.titleTask}</Paragraph>
-              <div className={styles["TasksList__actions"]}>
-                <button
-                  className={styles["TasksList__actionButton"]}
-                  onClick={() => {
-                    deleteTask(task._id!);
-                  }}
-                >
-                  <RiDeleteBin6Line size={18} color="#ff7b73" />
-                </button>
-                <button
-                  className={styles["TasksList__actionButton"]}
-                  onClick={() => handleEditTask(task._id, index)}
-                >
-                  <BiEditAlt size={18} color="#383838aa" />
-                </button>
-              </div>
+              <ActionButtons
+                onDelete={() => deleteTask(task._id!)}
+                onEdit={() => handleEditTask(task._id, index)}
+              />
             </div>
             <div
               className={styles["TasksList__description"]}

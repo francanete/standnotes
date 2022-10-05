@@ -6,10 +6,11 @@ import { useNoteDeleteMutation } from "../queries/useNoteDeleteMutation";
 import { Loading } from "../components/Loading";
 import { TasksList } from "../components/TasksList";
 import DOMPurify from "dompurify";
-
-import styles from "./NoteProfile.module.scss";
 import { ConfirmationModal } from "../components/ConfirmationModal";
 import { useState } from "react";
+import { ActionButtons } from "../components/ActionButtons";
+
+import styles from "./NoteProfile.module.scss";
 
 export const NoteProfile = () => {
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
@@ -38,16 +39,14 @@ export const NoteProfile = () => {
     <>
       <div className={styles["NoteProfile"]}>
         <div className={styles["NoteProfile__header"]}>
+          <ActionButtons
+            onDelete={() => setIsOpenConfirmation(true)}
+            onEdit={() => console.log("edit")}
+            // className={styles["NoteProfile__actions"]}
+          />
           <h1>{note.title}</h1>
           <p>{formatDate(note.date)}</p>
         </div>
-        <button
-          onClick={() => {
-            setIsOpenConfirmation(true);
-          }}
-        >
-          Delete
-        </button>
 
         <div
           className={styles["NoteProfile__description"]}
