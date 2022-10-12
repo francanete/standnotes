@@ -4,9 +4,9 @@ import { INotes } from "../types/notes";
 import { EditTaskModal } from "./EditTaskModal";
 import DOMPurify from "dompurify";
 import { Paragraph } from "./Paragraph";
+import { ActionButtons } from "./ActionButtons";
 
 import styles from "./TasksList.module.scss";
-import { ActionButtons } from "./ActionButtons";
 
 export const TasksList = ({ note }: { note: INotes }) => {
   const { mutateAsync: deleteTask } = useTaskDeleteMutation(note._id!);

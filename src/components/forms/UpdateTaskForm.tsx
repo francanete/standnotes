@@ -1,18 +1,8 @@
 import { useTaskUpdateMutation } from "../../queries/useTaskUpdateMutation";
 import { INotes } from "../../types/notes";
 import { TaskForm } from "./TaskForm";
-import * as Yup from "yup";
 import { useTaskQuery } from "../../queries/useTaskQuery";
 import { Loading } from "../Loading";
-
-const validationSchema = Yup.object({
-  tasks: Yup.array().of(
-    Yup.object().shape({
-      titleTask: Yup.string(),
-      descriptionTask: Yup.string(),
-    })
-  ),
-});
 
 export const UpdateTaskForm = ({
   taskId,
@@ -39,11 +29,5 @@ export const UpdateTaskForm = ({
     await mutateAsync(values);
     setOpen(false);
   };
-  return (
-    <TaskForm
-      onSubmit={onSubmit}
-      initialValues={currentValues}
-      validationSchema={validationSchema}
-    />
-  );
+  return <TaskForm onSubmit={onSubmit} initialValues={currentValues} />;
 };

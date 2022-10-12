@@ -22,17 +22,19 @@
 
   &__box {
     position: relative;
-    width: 80%;
-    margin: 0 10%;
-    padding: 50px;
+    width: 100%;
+    margin: 0 5px;
+    height: 80%;
+    padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
     background-color: white;
     cursor: auto;
 
     @media screen and (min-width: 800px) {
-      max-width: 600px;
+      width: 70%;
       margin: 0 30px;
+      padding: 20px;
     }
   }
 
@@ -42,15 +44,6 @@
     right: 20px;
     transition: transform 250ms ease-in-out;
     transform-origin: 50% 50%;
-
-    &:hover {
-      transform: rotate(180deg);
-    }
-  }
-
-  &__title {
-    color: #9e25fc;
-    font-size: 30px;
   }
 
   &__content {

@@ -1,11 +1,12 @@
 import { FieldArray, Form, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
 import { INotes, Tasks } from "../../types/notes";
-
-import styles from "./TaskForm.module.scss";
 import { FieldInput } from "../FieldInput";
 import { Label } from "../Label";
 import { TextEditor } from "../TextEditor";
+import { Button } from "../Button";
+
+import styles from "./TaskForm.module.scss";
 
 export const initialValuesSchema = {
   tasks: [
@@ -16,18 +17,20 @@ export const initialValuesSchema = {
   ],
 };
 
-const validationSchema = Yup.object({});
+const validationSchema = Yup.object({
+  tasks: Yup.array().of(
+    Yup.object().shape({
+      titleTask: Yup.string().required("Required"),
+      descriptionTask: Yup.string().required("Required"),
+    })
+  ),
+});
 
-const TaskFields = ({
-  errors,
-  isSubmitting,
-  initialValues,
-}: FormikProps<Partial<INotes>>) => {
+const TaskFields = ({ isValid }: FormikProps<Partial<INotes>>) => {
   return (
     <Form>
       <div className={styles["TaskForm"]}>
         <div>
-          <label htmlFor="titleTask">Add a task</label>
           <FieldArray name="tasks">
             {(fieldArrayProps) => {
               const { form } = fieldArrayProps;
@@ -36,7 +39,9 @@ const TaskFields = ({
 
               return (
                 <div>
-                  <button type="submit">Create Task</button>
+                  <Button disabled={!isValid} type="submit">
+                    Create Task
+                  </Button>
                   {tasks.map((_task: Tasks[], index: number) => (
                     <div key={index}>
                       <FieldInput
@@ -71,7 +76,6 @@ export const TaskForm = ({
 }: {
   onSubmit: (values: Partial<INotes>) => void;
   initialValues: typeof initialValuesSchema;
-  validationSchema: typeof validationSchema;
 }) => {
   return (
     <>

@@ -1,5 +1,6 @@
 import React from "react";
 import iconX from "../../images/x.svg";
+import { Heading } from "./Heading";
 
 import styles from "./Modal.module.scss";
 
@@ -35,7 +36,7 @@ export const Modal = ({ title, isOpen, onClose, children }: ModalProps) => {
           {/* <img src={iconX} alt={"close"} /> */}
           <span>X</span>
         </button>
-        <div className={styles["Modal__title"]}>{title}</div>
+        <Heading level={1}>{title}</Heading>
         <div className={styles["Modal__content"]}>{children}</div>
       </div>
     </div>

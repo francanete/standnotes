@@ -17,6 +17,7 @@ export const useTaskUpdateMutation = (taskId: string) => {
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries(["note-detail", data.data._id]);
+        queryClient.invalidateQueries(["task-detail", taskId]);
       },
     }
   );
