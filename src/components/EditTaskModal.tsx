@@ -22,7 +22,6 @@ export const EditTaskModal = ({
 }: IEditTaskModal) => {
   return (
     <Modal title={title} onClose={onClose} isOpen={isOpen}>
-      {<span>{tasks[taskIndex].titleTask}</span>}
       <UpdateTaskForm setOpen={setOpen} taskId={tasks[taskIndex]._id!} />
     </Modal>
   );
