@@ -11,6 +11,7 @@ import { useState } from "react";
 import { ActionButtons } from "../components/ActionButtons";
 
 import styles from "./NoteProfile.module.scss";
+import { Heading } from "../components/Heading";
 
 export const NoteProfile = () => {
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
@@ -52,8 +53,12 @@ export const NoteProfile = () => {
           className={styles["NoteProfile__description"]}
           dangerouslySetInnerHTML={createMarkup(note.description)}
         />
-
-        {note.tasks?.length === 0 ? <p>No tasks</p> : <TasksList note={note} />}
+        <Heading level={3}>What are you doing today?</Heading>
+        {note.tasks?.length === 0 ? (
+          <p>No tasks</p>
+        ) : (
+          <TasksList note={note} key={note._id} />
+        )}
         <CreateTaskForm noteId={noteId} />
       </div>
       <ConfirmationModal

@@ -1,11 +1,4 @@
-import {
-  ErrorMessage,
-  Field,
-  FieldArray,
-  Form,
-  Formik,
-  FormikProps,
-} from "formik";
+import { FieldArray, Form, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
 import { INotes, Tasks } from "../../types/notes";
 
@@ -46,26 +39,13 @@ const TaskFields = ({
                   <button type="submit">Create Task</button>
                   {tasks.map((_task: Tasks[], index: number) => (
                     <div key={index}>
-                      {/* <Field
-                        id={`tasks[${index}].titleTask`}
-                        name={`tasks[${index}].titleTask`}
-                        type="text"
-                        values={""}
-                        placeholder="Enter a title"
-                      />
-                      <ErrorMessage name={`tasks[${index}].titleTask`} /> */}
-
                       <FieldInput
                         label="Task title"
                         name={`tasks[${index}].titleTask`}
                       />
-
                       <Label htmlFor="description">Description</Label>
                       <TextEditor
                         value={values.tasks[index].descriptionTask}
-                        // setFieldValue={(val) =>
-                        //  setFieldValue("description", val)
-                        // }
                         setFieldValue={(val) =>
                           form.setFieldValue(
                             `tasks[${index}].descriptionTask`,
@@ -73,16 +53,6 @@ const TaskFields = ({
                           )
                         }
                       />
-
-                      {/* <Field
-                        id={`tasks[${index}].descriptionTask`}
-                        name={`tasks[${index}].descriptionTask`}
-                        type="text"
-                        as="textarea"
-                        values={""}
-                        placeholder="Enter a description"
-                      />
-                      <ErrorMessage name={`tasks[${index}].descriptionTask`} /> */}
                     </div>
                   ))}
                 </div>
