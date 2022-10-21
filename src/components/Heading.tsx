@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import styles from "./Heading.module.scss";
 
 interface PropsType {
-  level: 1 | 2 | 3 | 5 | 6;
+  level: 1 | 2 | 3 | 4 | 5 | 6;
   children?: ReactNode;
 }
 

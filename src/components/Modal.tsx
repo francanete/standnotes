@@ -1,10 +1,8 @@
 import React from "react";
-import iconX from "../../images/x.svg";
+import { Heading } from "./Heading";
+import { IoClose } from "react-icons/io5";
 
 import styles from "./Modal.module.scss";
-
-// import "./Modal.component.css";
-
 export interface ModalProps {
   title: string;
   isOpen: boolean;
@@ -32,10 +30,9 @@ export const Modal = ({ title, isOpen, onClose, children }: ModalProps) => {
       />
       <div className={styles["Modal__box"]}>
         <button className={styles["Modal__close"]} onClick={onClose}>
-          {/* <img src={iconX} alt={"close"} /> */}
-          <span>X</span>
+          <IoClose size={24} />
         </button>
-        <div className={styles["Modal__title"]}>{title}</div>
+        <Heading level={1}>{title}</Heading>
         <div className={styles["Modal__content"]}>{children}</div>
       </div>
     </div>

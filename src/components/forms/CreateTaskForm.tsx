@@ -1,27 +1,23 @@
 import { useTaskCreateMutation } from "../../queries/useTaskCreateMutation";
 import { INotes } from "../../types/notes";
 import { initialValuesSchema, TaskForm } from "./TaskForm";
-import * as Yup from "yup";
+import { Loading } from "../Loading";
 
-const validationSchema = Yup.object({
-  tasks: Yup.array().of(
-    Yup.object().shape({
-      titleTask: Yup.string().required("Required"),
-      descriptionTask: Yup.string().required("Required"),
-    })
-  ),
-});
+interface ICreateTaskForm {
+  noteId: string;
+  setOpen: (open: boolean) => void;
+}
 
-export const CreateTaskForm = ({ noteId }: { noteId: string }) => {
-  const { mutateAsync } = useTaskCreateMutation(noteId!);
+export const CreateTaskForm = ({ noteId, setOpen }: ICreateTaskForm) => {
+  const { mutateAsync, isLoading } = useTaskCreateMutation(noteId!);
   const onSubmit = async (values: Partial<INotes>) => {
     await mutateAsync(values);
+    setOpen(false);
   };
-  return (
-    <TaskForm
-      onSubmit={onSubmit}
-      initialValues={initialValuesSchema}
-      validationSchema={validationSchema}
-    />
-  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  return <TaskForm onSubmit={onSubmit} initialValues={initialValuesSchema} />;
 };
