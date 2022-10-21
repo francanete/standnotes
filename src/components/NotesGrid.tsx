@@ -18,7 +18,7 @@ export const NotesGrid = () => {
   return (
     <div className={styles["NotesGrid"]}>
       {notes.map((note) => (
-        <NoteCard note={note} />
+        <NoteCard key={note._id} note={note} />
       ))}
     </div>
   );
