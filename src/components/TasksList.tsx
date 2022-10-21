@@ -29,21 +29,19 @@ export const TasksList = ({ note }: { note: INotes }) => {
   return (
     <>
       {note?.tasks?.map((task, index) => (
-        <>
-          <div key={task._id} className={styles["TasksList"]}>
-            <div className={styles["TasksList__header"]}>
-              <Paragraph bold>{task.titleTask}</Paragraph>
-              <ActionButtons
-                onDelete={() => deleteTask(task._id!)}
-                onEdit={() => handleEditTask(task._id, index)}
-              />
-            </div>
-            <div
-              className={styles["TasksList__description"]}
-              dangerouslySetInnerHTML={createMarkup(task.descriptionTask)}
+        <div key={task._id} className={styles["TasksList"]}>
+          <div className={styles["TasksList__header"]}>
+            <Paragraph bold>{task.titleTask}</Paragraph>
+            <ActionButtons
+              onDelete={() => deleteTask(task._id!)}
+              onEdit={() => handleEditTask(task._id, index)}
             />
           </div>
-        </>
+          <div
+            className={styles["TasksList__description"]}
+            dangerouslySetInnerHTML={createMarkup(task.descriptionTask)}
+          />
+        </div>
       ))}
 
       {note.tasks && taskId && (

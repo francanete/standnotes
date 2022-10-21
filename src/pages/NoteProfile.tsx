@@ -57,11 +57,7 @@ export const NoteProfile = () => {
         />
         <Heading level={3}>What are you doing today?</Heading>
         <Button onClick={() => setIsOpen(true)}>Create Task</Button>
-        {note.tasks?.length === 0 ? (
-          <p>No tasks</p>
-        ) : (
-          <TasksList note={note} key={note._id} />
-        )}
+        {note.tasks?.length === 0 ? <p>No tasks</p> : <TasksList note={note} />}
       </div>
       <ConfirmationModal
         title="Delete Note"
