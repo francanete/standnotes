@@ -26,7 +26,7 @@ const validationSchema = Yup.object({
   ),
 });
 
-const TaskFields = ({ isValid }: FormikProps<Partial<INotes>>) => {
+const TaskFields = ({ isValid, dirty }: FormikProps<Partial<INotes>>) => {
   return (
     <Form>
       <div className={styles["TaskForm"]}>
@@ -39,7 +39,7 @@ const TaskFields = ({ isValid }: FormikProps<Partial<INotes>>) => {
 
               return (
                 <div>
-                  <Button disabled={!isValid} type="submit">
+                  <Button disabled={!isValid || !dirty} type="submit">
                     Create Task
                   </Button>
                   {tasks.map((_task: Tasks[], index: number) => (
@@ -48,7 +48,7 @@ const TaskFields = ({ isValid }: FormikProps<Partial<INotes>>) => {
                         label="Task title"
                         name={`tasks[${index}].titleTask`}
                       />
-                      <Label htmlFor="description">Description</Label>
+                      <Label htmlFor="descriptionTask">Description</Label>
                       <TextEditor
                         value={values.tasks[index].descriptionTask}
                         setFieldValue={(val) =>

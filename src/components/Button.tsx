@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 
 import styles from "./Button.module.scss";
@@ -10,7 +11,9 @@ export const Button = ({ children, onClick, disabled, ...props }: IButton) => {
       disabled={disabled}
       type={props.type}
       onClick={onClick}
-      className={styles["Button"]}
+      className={classNames(styles["Button"], {
+        [styles["Button--disabled"]]: disabled,
+      })}
     >
       {children}
     </button>

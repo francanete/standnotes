@@ -6,18 +6,21 @@ import { Button } from "./Button";
 import { FaPlus } from "react-icons/fa";
 import { TbBulb } from "react-icons/tb";
 import { TbBulbOff } from "react-icons/tb";
+import { ImArrowLeft2 } from "react-icons/im";
+import { useLocation } from "react-router-dom";
 
 import styles from "./NavBar.module.scss";
 
-export const NavBar = ({
-  theme,
-  switchTheme,
-}: {
+interface INavBar {
   theme: string;
   switchTheme: () => void;
-}) => {
+}
+
+export const NavBar = ({ theme, switchTheme }: INavBar) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  const path = useLocation().pathname;
+  const isRoot = path === "/";
 
   const menuItems = [
     {
@@ -75,12 +78,23 @@ export const NavBar = ({
       </div>
       {user && (
         <div className={styles["NavBar__secondary"]}>
-          <Link to={"/note/create"}>
-            <Button>
-              <FaPlus />
-              StandNote
-            </Button>
-          </Link>
+          <div>
+            {isRoot ? (
+              <Link to={"/note/create"}>
+                <Button>
+                  <FaPlus />
+                  StandNote
+                </Button>
+              </Link>
+            ) : (
+              <Link to={"/"}>
+                <Button>
+                  <ImArrowLeft2 />
+                  All Notes
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </>

@@ -1,9 +1,9 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
 import { INotes } from "../../types/notes";
-import { FieldInput } from "../FieldInput";
+import { FieldInput, TextError } from "../FieldInput";
 import { Button } from "../Button";
 
 import styles from "./CreateNoteForm.module.scss";
@@ -72,7 +72,7 @@ export const CreateNoteForm = () => {
                     formik.setFieldValue("description", val)
                   }
                 />
-
+                <ErrorMessage component={TextError} name={"description"} />
                 <FieldInput
                   name="date"
                   label="Date"

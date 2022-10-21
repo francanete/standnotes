@@ -36,7 +36,7 @@ export const TextEditor = ({ value, setFieldValue }: ITextEditorProps) => {
     <div>
       <Editor
         toolbar={{
-          options: ["inline", "list"],
+          options: ["inline", "list", "emoji", "link"],
         }}
         editorState={editorState}
         wrapperClassName="custom-wrapper"
