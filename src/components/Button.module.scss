@@ -12,6 +12,10 @@
   align-items: center;
   gap: 10px;
 
+  &:disabled {
+    opacity: 0.5;
+  }
+
   cursor: pointer;
   &:hover {
   }

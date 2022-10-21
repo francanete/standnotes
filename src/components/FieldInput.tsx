@@ -9,7 +9,7 @@ interface IFieldInput extends FieldAttributes<any> {
   name: string;
 }
 
-const TextError = (props: any) => (
+export const TextError = (props: any) => (
   <div className={styles["FieldInput__error"]}>{props.children}</div>
 );
 
