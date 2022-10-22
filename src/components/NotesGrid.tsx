@@ -17,7 +17,6 @@ export const NotesGrid = () => {
 
   return (
     <div className={styles["NotesGrid"]}>
-      Dev to Prod
       {notes.map((note) => (
         <NoteCard key={note._id} note={note} />
       ))}
