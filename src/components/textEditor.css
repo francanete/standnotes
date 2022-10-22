@@ -3,6 +3,7 @@
   display: block !important;
   margin-bottom: 25px !important;
   /* height: 220px !important; */
+  max-width: 600px;
 }
 
 .custom-editor {

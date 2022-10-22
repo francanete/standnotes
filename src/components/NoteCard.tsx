@@ -3,14 +3,20 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../utils/dateformatter";
 import { Badge } from "./Badge";
 import { Heading } from "./Heading";
-import { Paragraph } from "./Paragraph";
 import { INotes } from "../types/notes";
 
 import styles from "./NoteCard.module.scss";
+import DOMPurify from "dompurify";
 
 interface INoteCard {
   note: INotes;
 }
+
+const createMarkup = (html: string) => {
+  return {
+    __html: DOMPurify.sanitize(html),
+  };
+};
 
 export const NoteCard = ({ note }: INoteCard) => {
   return (
@@ -26,7 +32,10 @@ export const NoteCard = ({ note }: INoteCard) => {
         />
         <Heading level={2}>{note.title}</Heading>
         <span>{formatDate(note.date)}</span>
-        <Paragraph>{note.description}</Paragraph>
+        <div
+          className={styles["NoteCard__description"]}
+          dangerouslySetInnerHTML={createMarkup(note.description)}
+        />
       </div>
     </Link>
   );
