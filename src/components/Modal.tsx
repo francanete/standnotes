@@ -3,14 +3,22 @@ import { Heading } from "./Heading";
 import { IoClose } from "react-icons/io5";
 
 import styles from "./Modal.module.scss";
+import classNames from "classnames";
 export interface ModalProps {
   title: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
 }
 
-export const Modal = ({ title, isOpen, onClose, children }: ModalProps) => {
+export const Modal = ({
+  title,
+  isOpen,
+  onClose,
+  children,
+  className,
+}: ModalProps) => {
   const outsideRef = React.useRef(null);
 
   const handleCloseOnOverlay = (
@@ -22,7 +30,7 @@ export const Modal = ({ title, isOpen, onClose, children }: ModalProps) => {
   };
 
   return isOpen ? (
-    <div className={styles["Modal"]}>
+    <div className={classNames(styles["Modal"], className)}>
       <div
         ref={outsideRef}
         className={styles["Modal__overlay"]}

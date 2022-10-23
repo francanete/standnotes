@@ -9,12 +9,13 @@ import DOMPurify from "dompurify";
 import { ConfirmationModal } from "../components/ConfirmationModal";
 import { useState } from "react";
 import { ActionButtons } from "../components/ActionButtons";
-
-import styles from "./NoteProfile.module.scss";
 import { Heading } from "../components/Heading";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button";
-import { EditNoteModal } from "../components/EditNoteModal";
+import { UpdateNoteForm } from "../components/forms/UpdateNoteForm";
+import { IoClose } from "react-icons/io5";
+
+import styles from "./NoteProfile.module.scss";
 
 export const NoteProfile = () => {
   const [isOpenNoteEdit, setIsOpenNoteEdit] = useState(false);
@@ -45,45 +46,69 @@ export const NoteProfile = () => {
     <>
       <div className={styles["NoteProfile"]}>
         <div className={styles["NoteProfile__header"]}>
-          <ActionButtons
-            onDelete={() => setIsOpenConfirmation(true)}
-            onEdit={() => setIsOpenNoteEdit(true)}
-          />
-          <h1>{note.title}</h1>
-          <p>{formatDate(note.date)}</p>
+          {!isOpenNoteEdit ? (
+            <ActionButtons
+              onDelete={() => setIsOpenConfirmation(true)}
+              onEdit={() => setIsOpenNoteEdit(true)}
+            />
+          ) : (
+            <Button
+              className={styles["NoteProfile__close"]}
+              onClick={() => setIsOpenNoteEdit(false)}
+            >
+              <IoClose size={24} color="black" />
+            </Button>
+          )}
+          {isOpenNoteEdit ? (
+            <UpdateNoteForm setOpen={setIsOpenNoteEdit} noteId={noteId} />
+          ) : (
+            <>
+              <h1>{note.title}</h1>
+              <p>{formatDate(note.date)}</p>
+              <div
+                className={styles["NoteProfile__description"]}
+                dangerouslySetInnerHTML={createMarkup(note.description)}
+              />
+            </>
+          )}
         </div>
 
-        <div
-          className={styles["NoteProfile__description"]}
-          dangerouslySetInnerHTML={createMarkup(note.description)}
-        />
-        <Heading level={3}>What are you doing today?</Heading>
-        <Button onClick={() => setIsOpen(true)}>Create Task</Button>
-        {note.tasks?.length === 0 ? <p>No tasks</p> : <TasksList note={note} />}
-      </div>
-      <ConfirmationModal
-        title="Delete Note"
-        isOpen={isOpenConfirmation}
-        onClose={() => setIsOpenConfirmation(false)}
-        setOpen={setIsOpenConfirmation}
-        onConfirm={handleDeleteNote}
-      />
+        {!isOpenNoteEdit && (
+          <>
+            <Heading level={3}>What are you doing today?</Heading>
+            <Button onClick={() => setIsOpen(true)}>Create Task</Button>
 
-      <EditNoteModal
+            {note.tasks?.length === 0 ? (
+              <p>No tasks</p>
+            ) : (
+              <TasksList note={note} />
+            )}
+          </>
+        )}
+
+        <ConfirmationModal
+          title="Delete Note"
+          isOpen={isOpenConfirmation}
+          onClose={() => setIsOpenConfirmation(false)}
+          setOpen={setIsOpenConfirmation}
+          onConfirm={handleDeleteNote}
+        />
+        <CreateTaskModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          setOpen={setIsOpen}
+          noteId={noteId}
+          title="Create Task"
+        />
+      </div>
+
+      {/* <EditNoteModal
         title="Update Note"
         onClose={() => setIsOpenNoteEdit(false)}
         isOpen={isOpenNoteEdit}
         noteId={note._id!}
         setOpen={setIsOpenNoteEdit}
-      />
-
-      <CreateTaskModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        setOpen={setIsOpen}
-        noteId={noteId}
-        title="Create Task"
-      />
+      /> */}
     </>
   );
 };
