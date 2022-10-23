@@ -38,7 +38,7 @@ export const Modal = ({
       />
       <div className={styles["Modal__box"]}>
         <button className={styles["Modal__close"]} onClick={onClose}>
-          <IoClose size={24} />
+          <IoClose size={24} className={styles["Modal__closeIcon"]} />
         </button>
         <Heading level={1}>{title}</Heading>
         <div className={styles["Modal__content"]}>{children}</div>

@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .custom-wrapper {
   width: 100% !important;
   display: block !important;
@@ -17,4 +19,8 @@
 .custom-toolbar {
   background-color: transparent;
   border-radius: 9px;
+}
+
+.rdw-option-wrapper {
+  background-color: rgba(148, 148, 148, 0.527);
 }

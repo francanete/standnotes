@@ -5,7 +5,7 @@ import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "./textEditor.css";
+import "./textEditor.scss";
 
 interface ITextEditorProps {
   value: string;

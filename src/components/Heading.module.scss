@@ -8,5 +8,9 @@
   display: inline-block;
   max-width: 100%;
 
+  &--underline {
+    text-decoration: underline $text-primary 2px;
+  }
+
   // max-width: 300px;
 }

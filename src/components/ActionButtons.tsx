@@ -20,7 +20,7 @@ export const ActionButtons = ({
         <RiDeleteBin6Line size={18} color="#ff7b73" />
       </button>
       <button className={styles["ActionButtons__button"]} onClick={onEdit}>
-        <BiEditAlt size={18} color="#383838aa" />
+        <BiEditAlt size={18} className={styles["ActionButtons__icon"]} />
       </button>
     </div>
   );

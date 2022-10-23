@@ -14,6 +14,7 @@ import { Modal } from "../components/Modal";
 import { Button } from "../components/Button";
 import { UpdateNoteForm } from "../components/forms/UpdateNoteForm";
 import { IoClose } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa";
 
 import styles from "./NoteProfile.module.scss";
 
@@ -63,7 +64,9 @@ export const NoteProfile = () => {
             <UpdateNoteForm setOpen={setIsOpenNoteEdit} noteId={noteId} />
           ) : (
             <>
-              <h1>{note.title}</h1>
+              <Heading underline level={1}>
+                {note.title}
+              </Heading>
               <p>{formatDate(note.date)}</p>
               <div
                 className={styles["NoteProfile__description"]}
@@ -72,20 +75,23 @@ export const NoteProfile = () => {
             </>
           )}
         </div>
-
         {!isOpenNoteEdit && (
           <>
-            <Heading level={3}>What are you doing today?</Heading>
-            <Button onClick={() => setIsOpen(true)}>Create Task</Button>
-
+            <Heading level={2}>What are you doing today?</Heading>
             {note.tasks?.length === 0 ? (
               <p>No tasks</p>
             ) : (
               <TasksList note={note} />
             )}
+            <Button
+              className={styles["NoteProfile__button"]}
+              onClick={() => setIsOpen(true)}
+            >
+              <FaPlus />
+              Create Task
+            </Button>
           </>
         )}
-
         <ConfirmationModal
           title="Delete Note"
           isOpen={isOpenConfirmation}
@@ -101,14 +107,6 @@ export const NoteProfile = () => {
           title="Create Task"
         />
       </div>
-
-      {/* <EditNoteModal
-        title="Update Note"
-        onClose={() => setIsOpenNoteEdit(false)}
-        isOpen={isOpenNoteEdit}
-        noteId={note._id!}
-        setOpen={setIsOpenNoteEdit}
-      /> */}
     </>
   );
 };

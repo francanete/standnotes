@@ -28,11 +28,11 @@
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
-    background-color: white;
+    background-color: $background;
     cursor: auto;
 
     @media screen and (min-width: 800px) {
-      width: 70%;
+      max-width: 600px;
       margin: 0 30px;
       padding: 20px;
     }
@@ -48,11 +48,15 @@
     border: none;
     background-color: transparent;
   }
+  &__closeIcon {
+    color: $text-primary;
+  }
 
   &__content {
     margin-top: 30px;
     color: #6b6b6b;
     font-size: 16px;
+    max-width: 600px;
   }
 }
 

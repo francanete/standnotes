@@ -11,10 +11,14 @@
     border-radius: 9px;
     background-color: rgba(204, 204, 204, 0.04);
     transition: all 0.2s ease-in-out;
+    color: $text-primary;
     &:focus {
       outline: none;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       transform: translateY(-3px);
+    }
+    &::placeholder {
+      color: $text-primary;
     }
   }
   &__error {
