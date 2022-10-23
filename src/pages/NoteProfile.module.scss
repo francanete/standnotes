@@ -19,4 +19,13 @@
   &__description {
     gap: 20px;
   }
+
+  &__close {
+    transition: transform 250ms ease-in-out;
+    transform-origin: 50% 50%;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    margin-left: auto;
+  }
 }

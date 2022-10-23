@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import { INotes } from "../../types/notes";
 import { FieldInput, TextError } from "../FieldInput";
 import { Button } from "../Button";
-
-import styles from "./NoteForm.module.scss";
 import { TextEditor } from "../TextEditor";
 import { Label } from "../Label";
+
+import styles from "./NoteForm.module.scss";
 
 export const initialValuesSchema = {
   title: "",
@@ -38,22 +38,27 @@ const NoteFields = ({
           type="text"
           placeholder="Enter a title"
         />
-        <Label htmlFor="description">Description</Label>
-        <TextEditor
-          value={values.description || ""}
-          setFieldValue={(val) => setFieldValue("description", val)}
-        />
-        <ErrorMessage component={TextError} name={"description"} />
         <FieldInput
           name="date"
           label="Date"
           id="date"
           type="date"
           placeholder="Enter a date"
+          className={styles["NoteForm__date"]}
         />
+        <Label htmlFor="description">Description</Label>
+        <TextEditor
+          value={values.description || ""}
+          setFieldValue={(val) => setFieldValue("description", val)}
+        />
+        <ErrorMessage component={TextError} name={"description"} />
 
-        <Button type="submit" disabled={!isValid || isSubmitting}>
-          Create StandNote
+        <Button
+          className={styles["NoteForm__submitButton"]}
+          type="submit"
+          disabled={!isValid || isSubmitting}
+        >
+          Save Note
         </Button>
       </div>
     </Form>

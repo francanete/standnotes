@@ -1,5 +1,5 @@
-import React from "react";
 import { Modal, ModalProps } from "./Modal";
+import styles from "./ConfirmationModal.module.scss";
 
 interface IConfirmationModal extends Omit<ModalProps, "children"> {
   setOpen: (open: boolean) => void;
@@ -13,7 +13,12 @@ export const ConfirmationModal = ({
   onConfirm,
 }: IConfirmationModal) => {
   return (
-    <Modal title={title} onClose={onClose} isOpen={isOpen}>
+    <Modal
+      className={styles["ConfirmationModal"]}
+      title={title}
+      onClose={onClose}
+      isOpen={isOpen}
+    >
       <p>Are you sure?</p>
       <button onClick={onConfirm}>Yes</button>
     </Modal>
