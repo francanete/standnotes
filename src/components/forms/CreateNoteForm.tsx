@@ -1,44 +1,11 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
 import { INotes } from "../../types/notes";
-import { FieldInput, TextError } from "../FieldInput";
-import { Button } from "../Button";
-
-import styles from "./CreateNoteForm.module.scss";
-import { TextEditor } from "../TextEditor";
-import { initialValuesSchema } from "./TaskForm";
-import { Label } from "../Label";
-
-const initialValues = {
-  title: "",
-  description: "",
-  date: "",
-  // tasks: [
-  //   {
-  //     titleTask: "",
-  //     descriptionTask: "",
-  //   },
-  // ],
-};
-
-const validationSchema = Yup.object({
-  title: Yup.string()
-    .required("Required")
-    .min(5, "Must be 5 characters or more"),
-  description: Yup.string().required("Required"),
-  date: Yup.string().required("Required"),
-  // tasks: Yup.array().of(
-  //   Yup.object().shape({
-  //     titleTask: Yup.string().required("Required"),
-  //     descriptionTask: Yup.string().required("Required"),
-  //   })
-  // ),
-});
+import { Loading } from "../Loading";
+import { useNoteCreateMutation } from "../../queries/useNoteCreateMutation";
+import { useNavigate } from "react-router-dom";
+import { initialValuesSchema, NoteForm } from "./NoteForm";
 
 export const CreateNoteForm = () => {
-  const { mutateAsync, isSuccess } = useNoteCreateMutation();
+  const { mutateAsync, isLoading } = useNoteCreateMutation();
   const nav = useNavigate();
 
   const onSubmit = async (values: INotes) => {
@@ -46,52 +13,9 @@ export const CreateNoteForm = () => {
     nav(`/note/${note.data._id}`);
   };
 
-  return (
-    <>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-        validateOnMount
-      >
-        {(formik) => {
-          return (
-            <Form>
-              <div className={styles["CreateNoteForm"]}>
-                <FieldInput
-                  name="title"
-                  label="Title"
-                  id="title"
-                  type="text"
-                  placeholder="Enter a title"
-                />
-                <Label htmlFor="description">Description</Label>
-                <TextEditor
-                  value={formik.values.description}
-                  setFieldValue={(val) =>
-                    formik.setFieldValue("description", val)
-                  }
-                />
-                <ErrorMessage component={TextError} name={"description"} />
-                <FieldInput
-                  name="date"
-                  label="Date"
-                  id="date"
-                  type="date"
-                  placeholder="Enter a date"
-                />
+  if (isLoading) {
+    return <Loading />;
+  }
 
-                <Button
-                  type="submit"
-                  disabled={!formik.isValid || formik.isSubmitting}
-                >
-                  Create StandNote
-                </Button>
-              </div>
-            </Form>
-          );
-        }}
-      </Formik>
-    </>
-  );
+  return <NoteForm onSubmit={onSubmit} initialValues={initialValuesSchema} />;
 };
