@@ -14,8 +14,10 @@ import styles from "./NoteProfile.module.scss";
 import { Heading } from "../components/Heading";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button";
+import { EditNoteModal } from "../components/EditNoteModal";
 
 export const NoteProfile = () => {
+  const [isOpenNoteEdit, setIsOpenNoteEdit] = useState(false);
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,7 +47,7 @@ export const NoteProfile = () => {
         <div className={styles["NoteProfile__header"]}>
           <ActionButtons
             onDelete={() => setIsOpenConfirmation(true)}
-            onEdit={() => console.log("edit")}
+            onEdit={() => setIsOpenNoteEdit(true)}
           />
           <h1>{note.title}</h1>
           <p>{formatDate(note.date)}</p>
@@ -66,6 +68,15 @@ export const NoteProfile = () => {
         setOpen={setIsOpenConfirmation}
         onConfirm={handleDeleteNote}
       />
+
+      <EditNoteModal
+        title="Update Note"
+        onClose={() => setIsOpenNoteEdit(false)}
+        isOpen={isOpenNoteEdit}
+        noteId={note._id!}
+        setOpen={setIsOpenNoteEdit}
+      />
+
       <CreateTaskModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
