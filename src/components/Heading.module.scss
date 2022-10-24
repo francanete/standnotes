@@ -1,12 +1,20 @@
 @import "../variables.scss";
 
 .Heading {
-  //create a text ellipsis and add a 3 dots at the end
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  max-width: 100%;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
+  // display: inline-block;
+  // max-width: 100%;
+
+  &--ellipsis {
+    //create a text ellipsis and add a 3 dots at the end
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+  }
 
   &--underline {
     text-decoration: underline $text-primary 2px;

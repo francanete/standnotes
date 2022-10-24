@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useNoteQuery } from "../queries/useNoteQuery";
 import { CreateTaskForm } from "../components/forms/CreateTaskForm";
-import { formatDate } from "../utils/dateformatter";
 import { useNoteDeleteMutation } from "../queries/useNoteDeleteMutation";
 import { Loading } from "../components/Loading";
 import { TasksList } from "../components/TasksList";
@@ -17,6 +16,7 @@ import { IoClose } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 
 import styles from "./NoteProfile.module.scss";
+import { formatDate } from "../utils/date";
 
 export const NoteProfile = () => {
   const [isOpenNoteEdit, setIsOpenNoteEdit] = useState(false);
@@ -26,14 +26,14 @@ export const NoteProfile = () => {
   const { noteId } = useParams();
   const { data: note } = useNoteQuery(noteId!);
   const nav = useNavigate();
-  const { mutateAsync } = useNoteDeleteMutation();
+  const { mutateAsync: deleteNote } = useNoteDeleteMutation();
 
   if (!note || !noteId) {
     return <Loading />;
   }
 
   const handleDeleteNote = () => {
-    noteId && mutateAsync(noteId);
+    noteId && deleteNote(noteId);
     nav("/");
   };
 
@@ -42,6 +42,24 @@ export const NoteProfile = () => {
       __html: DOMPurify.sanitize(html),
     };
   };
+
+  const getDayOfWeek = (date: string) => {
+    const dayOfWeek = new Date(date).getDay();
+    return isNaN(dayOfWeek)
+      ? null
+      : [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ][dayOfWeek];
+  };
+
+  const dayWeek = getDayOfWeek(note.date);
+  console.log(dayWeek);
 
   return (
     <>
@@ -65,7 +83,7 @@ export const NoteProfile = () => {
           ) : (
             <>
               <Heading underline level={1}>
-                {note.title}
+                {`${dayWeek}: ${note.title}`}
               </Heading>
               <p>{formatDate(note.date)}</p>
               <div

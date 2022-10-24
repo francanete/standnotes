@@ -18,6 +18,7 @@ export const FieldInput = ({
   name,
   label,
   className,
+  autoFocus,
   ...rest
 }: IFieldInput) => {
   return (
@@ -26,6 +27,7 @@ export const FieldInput = ({
       <Field
         id={name}
         name={name}
+        autoFocus={autoFocus}
         {...rest}
         className={styles["FieldInput__input"]}
       />

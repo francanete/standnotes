@@ -37,6 +37,7 @@ const NoteFields = ({
           id="title"
           type="text"
           placeholder="Enter a title"
+          autoFocus
         />
         <FieldInput
           name="date"

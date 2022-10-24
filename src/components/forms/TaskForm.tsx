@@ -40,13 +40,14 @@ const TaskFields = ({ isValid, dirty }: FormikProps<Partial<INotes>>) => {
               return (
                 <div>
                   <Button disabled={!isValid || !dirty} type="submit">
-                    Create Task
+                    Save Task
                   </Button>
                   {tasks.map((_task: Tasks[], index: number) => (
                     <div key={index}>
                       <FieldInput
                         label="Task title"
                         name={`tasks[${index}].titleTask`}
+                        autoFocus
                       />
                       <Label htmlFor="descriptionTask">Description</Label>
                       <TextEditor

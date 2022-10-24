@@ -1,0 +1,24 @@
+@import "../variables.scss";
+
+.FeaturedNotesCard {
+  padding: 0 5px;
+
+  @media screen and (min-width: 880px) {
+    margin: 0 10%;
+    max-width: 800px;
+  }
+
+  @media screen and (min-width: 1025px) {
+    margin: 0 20%;
+    max-width: 800px;
+  }
+
+  &__card {
+    height: 250px;
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    max-height: 118px;
+  }
+}

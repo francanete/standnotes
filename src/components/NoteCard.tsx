@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { formatDate } from "../utils/dateformatter";
 import { Badge } from "./Badge";
 import { Heading } from "./Heading";
 import { INotes } from "../types/notes";
 
 import styles from "./NoteCard.module.scss";
 import DOMPurify from "dompurify";
+import classNames from "classnames";
+import { Paragraph } from "./Paragraph";
+import { getDayAndNumber } from "../utils/date";
 
 interface INoteCard {
   note: INotes;
+  className?: string;
+  descriptionStyles?: string;
 }
 
 const createMarkup = (html: string) => {
@@ -18,10 +22,10 @@ const createMarkup = (html: string) => {
   };
 };
 
-export const NoteCard = ({ note }: INoteCard) => {
+export const NoteCard = ({ note, className, descriptionStyles }: INoteCard) => {
   return (
     <Link to={`/note/${note._id}`} key={note._id}>
-      <div className={styles["NoteCard"]}>
+      <div className={classNames(styles["NoteCard"], className)}>
         <Badge
           className={styles["NoteCard__badge"]}
           content={
@@ -30,10 +34,15 @@ export const NoteCard = ({ note }: INoteCard) => {
               : `${note.tasks?.length} tasks`
           }
         />
-        <Heading level={2}>{note.title}</Heading>
-        <span>{formatDate(note.date)}</span>
+        <Heading ellipsis level={2}>
+          {note.title}
+        </Heading>
+        <Paragraph bold>{getDayAndNumber(note.date)}</Paragraph>
         <div
-          className={styles["NoteCard__description"]}
+          className={classNames(
+            styles["NoteCard__description"],
+            descriptionStyles
+          )}
           dangerouslySetInnerHTML={createMarkup(note.description)}
         />
       </div>
