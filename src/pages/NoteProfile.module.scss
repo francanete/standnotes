@@ -18,6 +18,12 @@
 
   &__description {
     gap: 20px;
+
+    a {
+      text-decoration: none;
+      color: #0045a5;
+      font-weight: bold;
+    }
   }
 
   &__button {

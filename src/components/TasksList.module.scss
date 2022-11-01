@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    line-height: 1.5;
 
     p {
       margin: 0;
@@ -23,11 +24,18 @@
     margin: 0 auto;
     padding: 10px 10px;
 
+    line-height: 1.5;
+
     p {
       margin: 0;
     }
     ul {
-      margin: 5px 0 0 0;
+      // margin: 5px 0 0 0;
+    }
+    a {
+      color: #0045a5;
+      text-decoration: none;
+      font-weight: bold;
     }
   }
 

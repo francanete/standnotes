@@ -21,6 +21,8 @@ export const FeaturedNotesGrid = () => {
   return (
     <div className={styles["FeaturedNotesCard"]}>
       {notes.map((note) => {
+        console.log(note._id);
+
         return (
           <>
             {formatDate(note.date) === formatDate(today.toDateString()) ? (

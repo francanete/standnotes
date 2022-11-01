@@ -16,7 +16,7 @@ import { IoClose } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 
 import styles from "./NoteProfile.module.scss";
-import { formatDate } from "../utils/date";
+import { formatDate, getDayOfWeek } from "../utils/date";
 
 export const NoteProfile = () => {
   const [isOpenNoteEdit, setIsOpenNoteEdit] = useState(false);
@@ -43,23 +43,7 @@ export const NoteProfile = () => {
     };
   };
 
-  const getDayOfWeek = (date: string) => {
-    const dayOfWeek = new Date(date).getDay();
-    return isNaN(dayOfWeek)
-      ? null
-      : [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ][dayOfWeek];
-  };
-
   const dayWeek = getDayOfWeek(note.date);
-  console.log(dayWeek);
 
   return (
     <>
