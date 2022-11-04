@@ -1,0 +1,34 @@
+@import "../variables.scss";
+
+.EmptyNote {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  border: 1px solid #ccc;
+  background-color: rgba(204, 204, 204, 0.04);
+  border-radius: 9px;
+  box-shadow: 0 0 10px rgba(116, 249, 96, 0.464);
+  transition: all 0.2s ease-in-out;
+  min-height: 175px;
+  height: 100%;
+
+  &:hover {
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
+  &__badge {
+    margin-left: auto;
+  }
+
+  &__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+    padding-bottom: 5px;
+  }
+}

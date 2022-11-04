@@ -1,5 +1,5 @@
+import moment from "moment";
 import { useNotesQuery } from "../queries/useNotesQuery";
-import { formatDate } from "../utils/date";
 import { Loading } from "./Loading";
 import { NoteCard } from "./NoteCard";
 
@@ -18,17 +18,19 @@ export const NotesGrid = () => {
 
   const today = new Date();
 
+  const hasTodayNote = notes.some((note) => {
+    return moment(note.date).isSame(today, "day");
+  });
+
   return (
     <div className={styles["NotesGrid"]}>
-      {notes.map((note) => {
-        return (
-          <>
-            {formatDate(note.date) !== formatDate(today.toDateString()) ? (
-              <NoteCard key={note._id} note={note} />
-            ) : null}
-          </>
-        );
-      })}
+      {hasTodayNote
+        ? notes.slice(2).map((note) => {
+            return <NoteCard key={note._id} note={note} />;
+          })
+        : notes.slice(1).map((note) => {
+            return <NoteCard key={note._id} note={note} />;
+          })}
     </div>
   );
 };

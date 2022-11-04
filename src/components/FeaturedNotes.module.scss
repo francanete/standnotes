@@ -1,0 +1,22 @@
+@import "../variables.scss";
+
+.FeaturedNotes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
+  @media screen and (min-width: 880px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 20px;
+  }
+
+  &__yesterday {
+    box-shadow: 0 0 10px rgba(116, 200, 255, 0.585);
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(116, 200, 255, 0.585);
+    }
+  }
+}
