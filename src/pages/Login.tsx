@@ -9,5 +9,13 @@ export const Login = () => {
     await login(values);
   };
 
-  return <AuthForm onSubmit={onSubmit} isLoading={isLoading} error={error} />;
+  return (
+    <AuthForm
+      header="Log in to continue"
+      action="Log in"
+      onSubmit={onSubmit}
+      isLoading={isLoading}
+      error={error}
+    />
+  );
 };

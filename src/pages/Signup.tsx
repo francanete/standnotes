@@ -9,5 +9,13 @@ export const Signup = () => {
     await signup(values);
   };
 
-  return <AuthForm onSubmit={onSubmit} isLoading={isLoading} error={error} />;
+  return (
+    <AuthForm
+      header="Create an account to get started"
+      action="Get started"
+      onSubmit={onSubmit}
+      isLoading={isLoading}
+      error={error}
+    />
+  );
 };

@@ -3,12 +3,15 @@ import { FieldInput } from "../FieldInput";
 
 import styles from "./AuthForm.module.scss";
 import { Button } from "../Button";
-import { Loading } from "../Loading";
+import { ClipLoader } from "react-spinners";
+import { Heading } from "../Heading";
 
 interface IAuthForm {
   onSubmit: (values: { email: string; password: string }) => void;
   error: boolean | null;
-  isLoading: boolean | null;
+  isLoading: boolean;
+  header: string;
+  action?: string;
 }
 
 const initialValues = {
@@ -16,9 +19,16 @@ const initialValues = {
   password: "",
 };
 
-export const AuthForm = ({ onSubmit, isLoading, error }: IAuthForm) => {
+export const AuthForm = ({
+  onSubmit,
+  isLoading,
+  error,
+  header,
+  action = "Submit",
+}: IAuthForm) => {
   return (
     <div className={styles["AuthForm"]}>
+      <Heading level={2}>{header}</Heading>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className={styles["AuthForm__form"]}>
           <FieldInput
@@ -37,8 +47,8 @@ export const AuthForm = ({ onSubmit, isLoading, error }: IAuthForm) => {
             placeholder="Enter your password"
           />
           <Button disabled={isLoading ? isLoading : undefined} type="submit">
-            {isLoading ? <Loading /> : null}
-            Login
+            <ClipLoader loading={isLoading} color="white" size={12} />
+            {action}
           </Button>
           {error && <p>{error}</p>}
         </Form>

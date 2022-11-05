@@ -56,13 +56,13 @@ export const NavBar = ({ theme, switchTheme }: INavBar) => {
               <span className={styles["NavBar__access--email"]}>
                 {user && user.email}
               </span>
-              <Button onClick={handleLogout}>Logout</Button>
+              <Button onClick={handleLogout}>Log out</Button>
             </>
           ) : (
             <>
-              <Link to={"/signup"}>Signup</Link>
+              <Link to={"/signup"}>Get Started</Link>
               <Link to={"/login"}>
-                <Button>Login</Button>
+                <Button>Log in</Button>
               </Link>
             </>
           )}
