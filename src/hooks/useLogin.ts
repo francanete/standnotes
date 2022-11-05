@@ -5,7 +5,7 @@ import { BASE_URL } from "../env";
 
 export const useLogin = () => {
   const [error, setError] = useState<boolean | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>();
+  const [isLoading, setIsLoading] = useState<boolean | null>(null);
   const { dispatch } = useAuthContext();
 
   const login = async ({ email, password }: IUser) => {

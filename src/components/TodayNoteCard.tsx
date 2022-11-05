@@ -3,10 +3,9 @@ import moment from "moment";
 import { Loading } from "./Loading";
 import { NoteCard as TodayCard } from "./NoteCard";
 import classNames from "classnames";
+import { EmptyNote } from "./EmptyNote";
 
 import styles from "./TodayNoteCard.module.scss";
-import { EmptyNote } from "./EmptyNote";
-import { Heading } from "./Heading";
 
 export const TodayNoteCard = () => {
   const { data: notes, isLoading } = useNotesQuery();
