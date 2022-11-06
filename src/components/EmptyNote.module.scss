@@ -14,11 +14,10 @@
   border-radius: 9px;
   box-shadow: 0 0 10px rgba(116, 249, 96, 0.464);
   transition: all 0.2s ease-in-out;
-  min-height: 175px;
-  height: 100%;
+  height: inherit;
+  min-height: 190px;
 
   &:hover {
-    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
   }
   &__badge {
