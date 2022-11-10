@@ -14,9 +14,9 @@ import { Button } from "../components/Button";
 import { UpdateNoteForm } from "../components/forms/UpdateNoteForm";
 import { IoClose } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
+import { formatDate, getDayOfWeek } from "../utils/date";
 
 import styles from "./NoteProfile.module.scss";
-import { formatDate, getDayOfWeek } from "../utils/date";
 
 export const NoteProfile = () => {
   const [isOpenNoteEdit, setIsOpenNoteEdit] = useState(false);
