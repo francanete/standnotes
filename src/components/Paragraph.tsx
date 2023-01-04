@@ -1,4 +1,3 @@
-// create a custom paragraph component
 import classNames from "classnames";
 import React from "react";
 import styles from "./Paragraph.module.scss";
