@@ -14,7 +14,7 @@ export const EmptyNote = ({ className }: INoteCard) => {
     <Link to={`/note/create`}>
       <div className={classNames(styles["EmptyNote"], className)}>
         <FaPlus size={50} />
-        <Heading level={2}>Add today's note</Heading>
+        <Heading level={2}>Add today&apos;s note</Heading>
       </div>
     </Link>
   );
