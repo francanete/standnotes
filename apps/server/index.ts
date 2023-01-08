@@ -45,7 +45,7 @@ mongoose
     // Listen for requests
     app.listen(process.env.PORT, () => {
       console.log(
-        `Server connected to DB and started on port ${process.env.PORT}`
+        `[⚡️SERVER⚡️] connected to DB and started on port ${process.env.PORT}`
       );
     });
   })
