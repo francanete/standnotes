@@ -9,7 +9,6 @@ const config: DocsThemeConfig = {
   editLink: {
     text: "Edit this page on GitHub",
   },
-
   // chat: {
   //   link: "https://discord.com",
   // },
