@@ -12,7 +12,8 @@ const config: DocsThemeConfig = {
   // chat: {
   //   link: "https://discord.com",
   // },
-  docsRepositoryBase: "https://github.com/francanete/standnotes",
+  docsRepositoryBase:
+    "https://github.com/francanete/standnotes/blob/development/apps/docs",
   footer: {
     text: "StandNotes Documentation",
   },
