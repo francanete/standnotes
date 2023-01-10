@@ -12,5 +12,5 @@
       "cache": false
     }
   },
-  "globalEnv": ["REACT_APP_BASE_URL", "MONGO_URI", "PORT"]
+  "globalEnv": ["REACT_APP_BASE_URL", "MONGO_URI", "PORT", "SECRET_JWT"]
 }
