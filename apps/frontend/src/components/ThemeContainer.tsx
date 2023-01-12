@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import useLocalStorage from "use-local-storage";
+import { MainFooter } from "./MainFooter";
 import { NavBar } from "./NavBar";
 
 import styles from "./ThemeContainer.module.scss";
@@ -25,6 +26,7 @@ export const ThemeContainer = ({
     <div className={styles["ThemeComtainer"]} {...rest} data-theme={theme}>
       <NavBar theme={theme} switchTheme={switchTheme} />
       {children}
+      <MainFooter />
     </div>
   );
 };

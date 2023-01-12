@@ -24,6 +24,7 @@ export const FeaturedNotes = () => {
       <YesterdayNoteCard
         note={yesterdayNote}
         className={styles["FeaturedNotes__yesterday"]}
+        isFeaturedNote={true}
       />
     </div>
   );

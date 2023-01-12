@@ -33,6 +33,7 @@ export const TodayNoteCard = () => {
         <TodayCard
           note={todayNote}
           className={styles["TodayNoteCard__today"]}
+          isFeaturedNote={true}
         />
       ) : (
         <EmptyNote />

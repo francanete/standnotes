@@ -14,6 +14,7 @@ interface INoteCard {
   note: INotes;
   className?: string;
   descriptionStyles?: string;
+  isFeaturedNote?: boolean;
 }
 
 const createMarkup = (html: string) => {
@@ -22,29 +23,40 @@ const createMarkup = (html: string) => {
   };
 };
 
-export const NoteCard = ({ note, className, descriptionStyles }: INoteCard) => {
+export const NoteCard = ({
+  note,
+  className,
+  descriptionStyles,
+  isFeaturedNote = false,
+}: INoteCard) => {
   return (
     <Link to={`/note/${note._id}`} key={note._id}>
       <div className={classNames(styles["NoteCard"], className)}>
-        <Badge
-          className={styles["NoteCard__badge"]}
-          content={
-            note.tasks?.length === 1
-              ? `${note.tasks?.length} task`
-              : `${note.tasks?.length} tasks`
-          }
-        />
-        <Heading ellipsis level={2}>
+        {isFeaturedNote ? (
+          <Badge
+            className={styles["NoteCard__badge"]}
+            content={
+              note.tasks?.length === 1
+                ? `${note.tasks?.length} task`
+                : `${note.tasks?.length} tasks`
+            }
+          />
+        ) : null}
+        <Heading ellipsis level={isFeaturedNote ? 2 : 3}>
           {note.title}
         </Heading>
-        <Paragraph bold>{getDayAndNumber(note.date)}</Paragraph>
-        <div
-          className={classNames(
-            styles["NoteCard__description"],
-            descriptionStyles
-          )}
-          dangerouslySetInnerHTML={createMarkup(note.description)}
-        />
+        <Paragraph bold={isFeaturedNote ? true : false}>
+          {getDayAndNumber(note.date)}
+        </Paragraph>
+        {isFeaturedNote ? (
+          <div
+            className={classNames(
+              styles["NoteCard__description"],
+              descriptionStyles
+            )}
+            dangerouslySetInnerHTML={createMarkup(note.description)}
+          />
+        ) : null}
       </div>
     </Link>
   );
