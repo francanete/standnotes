@@ -26,10 +26,22 @@ export const NotesGrid = () => {
     <div className={styles["NotesGrid"]}>
       {hasTodayNote
         ? notes.slice(2).map((note) => {
-            return <NoteCard key={note._id} note={note} />;
+            return (
+              <NoteCard
+                key={note._id}
+                note={note}
+                className={styles.NotesGrid__card}
+              />
+            );
           })
         : notes.slice(1).map((note) => {
-            return <NoteCard key={note._id} note={note} />;
+            return (
+              <NoteCard
+                key={note._id}
+                note={note}
+                className={styles.NotesGrid__card}
+              />
+            );
           })}
     </div>
   );

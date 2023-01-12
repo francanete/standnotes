@@ -4,8 +4,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem;
   gap: 1rem;
+  margin: 2rem auto 5rem;
+  width: 100%;
+  max-width: 1200px;
+
   @media screen and (min-width: 880px) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
