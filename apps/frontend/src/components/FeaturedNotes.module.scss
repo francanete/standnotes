@@ -1,25 +1,6 @@
 @import "../variables.scss";
 
 .FeaturedNotes {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
   margin: 2rem auto 5rem;
   width: 100%;
-  max-width: 1200px;
-
-  @media screen and (min-width: 880px) {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-gap: 20px;
-  }
-
-  &__yesterday {
-    box-shadow: 0 0 10px rgba(116, 200, 255, 0.585);
-
-    &:hover {
-      box-shadow: 0 0 10px rgba(116, 200, 255, 0.585);
-    }
-  }
 }

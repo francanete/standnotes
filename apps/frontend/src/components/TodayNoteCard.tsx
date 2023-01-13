@@ -8,7 +8,7 @@ import { EmptyNote } from "./EmptyNote";
 import styles from "./TodayNoteCard.module.scss";
 
 export const TodayNoteCard = () => {
-  const { data: notes, isLoading } = useNotesQuery();
+  const { data: notes, isLoading } = useNotesQuery({ pageParam: undefined });
 
   if (isLoading) {
     return <Loading />;

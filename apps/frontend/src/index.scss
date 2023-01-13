@@ -1,5 +1,10 @@
 @import "./variables.scss";
 
+* {
+  box-sizing: border-box;
+  // outline: 3px solid limegreen !important;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;

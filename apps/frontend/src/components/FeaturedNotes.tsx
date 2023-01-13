@@ -1,12 +1,11 @@
 import { useNotesQuery } from "../queries/useNotesQuery";
-import { NoteCard as YesterdayNoteCard } from "./NoteCard";
 import { TodayNoteCard } from "./TodayNoteCard";
-
-import styles from "./FeaturedNotes.module.scss";
 import { getPreviousNote } from "../utils/notes";
 
+import styles from "./FeaturedNotes.module.scss";
+
 export const FeaturedNotes = () => {
-  const { data: notes } = useNotesQuery();
+  const { data: notes } = useNotesQuery({ pageParam: undefined });
 
   if (!notes) {
     return null;
@@ -21,11 +20,6 @@ export const FeaturedNotes = () => {
   return (
     <div className={styles["FeaturedNotes"]}>
       <TodayNoteCard />
-      <YesterdayNoteCard
-        note={yesterdayNote}
-        className={styles["FeaturedNotes__yesterday"]}
-        isFeaturedNote={true}
-      />
     </div>
   );
 };

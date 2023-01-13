@@ -9,12 +9,24 @@ const Note = require("../models/noteModel");
 interface INoteRequest {
   user: IUser;
   body: INotesSchema;
+  query: {
+    page: number;
+  };
 }
 
 export const getAllNotes = async (req: INoteRequest, res: Response) => {
   const userId = req.user._id;
+  const page = req.query.page;
 
-  const notes = await Note.find({ userId }).sort({ date: -1 });
+  const limit = 5;
+
+  console.log({ page });
+
+  const notes = await Note.find({ userId })
+    .sort({ date: -1 })
+    .skip(page * limit)
+    .limit(limit);
+
   res.status(200).json(notes);
 };
 
