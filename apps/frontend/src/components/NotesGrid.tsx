@@ -16,7 +16,7 @@ export const NotesGrid = () => {
   }
 
   if (!notes || notes.length === 0) {
-    return <div>No notes found, enter your first StandNote.</div>;
+    return <div>No notes found, enter your first StandNote</div>;
   }
   const isLastPage = notes.length / 5 < pageNumber;
 
