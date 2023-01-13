@@ -9,6 +9,21 @@
   width: 100%;
   max-width: 900px;
 
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__buttonBack {
+    margin-right: auto;
+  }
+
+  &__buttonNext {
+    margin-left: auto;
+  }
+
   &__card {
     display: flex;
     flex-direction: column;

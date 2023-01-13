@@ -16,13 +16,15 @@ interface INoteRequest {
 
 export const getAllNotes = async (req: INoteRequest, res: Response) => {
   const userId = req.user._id;
-  const page = req.query.page || 1;
+  const page = req.query.page;
 
   const limit = 5;
 
+  console.log({ page });
+
   const notes = await Note.find({ userId })
     .sort({ date: -1 })
-    .skip((page - 1) * limit)
+    .skip(page * limit)
     .limit(limit);
 
   res.status(200).json(notes);

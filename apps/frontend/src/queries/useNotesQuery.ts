@@ -7,12 +7,7 @@ interface IUseNotesQuery {
 }
 
 export const useNotesQuery = ({ pageParam }: IUseNotesQuery) => {
-  return useQuery<INotes[], Error>(
-    ["notes", pageParam],
-    () => fetchAllNotesApiCall({ pageParam }),
-    {
-      keepPreviousData: true,
-      staleTime: 1000 * 60 * 5,
-    }
+  return useQuery<INotes[], Error>(["notes", pageParam], () =>
+    fetchAllNotesApiCall({ pageParam })
   );
 };

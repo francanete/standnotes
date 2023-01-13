@@ -5,9 +5,10 @@ import { NoteCard } from "./NoteCard";
 
 import styles from "./NotesGrid.module.scss";
 import { useState } from "react";
+import { Button } from "./Button";
 
 export const NotesGrid = () => {
-  const [pageNumber, setPageNamber] = useState(1);
+  const [pageNumber, setPageNamber] = useState(0);
   const { data: notes, isLoading } = useNotesQuery({ pageParam: pageNumber });
 
   if (isLoading) {
@@ -17,6 +18,7 @@ export const NotesGrid = () => {
   if (!notes || notes.length === 0) {
     return <div>No notes found, enter your first StandNote.</div>;
   }
+  const isLastPage = notes.length / 5 < pageNumber;
 
   const today = new Date();
 
@@ -26,6 +28,26 @@ export const NotesGrid = () => {
 
   return (
     <div className={styles["NotesGrid"]}>
+      <div className={styles["NotesGrid__buttons"]}>
+        {pageNumber !== 0 ? (
+          <Button
+            disabled={pageNumber === 0}
+            onClick={() => setPageNamber((page) => page - 1)}
+            className={styles["NotesGrid__buttonBack"]}
+          >
+            Back
+          </Button>
+        ) : null}
+        {!isLastPage ? (
+          <Button
+            disabled={isLastPage}
+            onClick={() => setPageNamber((page) => page + 1)}
+            className={styles["NotesGrid__buttonNext"]}
+          >
+            Next
+          </Button>
+        ) : null}
+      </div>
       {notesExcludingToday.map((note) => {
         return (
           <NoteCard
@@ -35,8 +57,6 @@ export const NotesGrid = () => {
           />
         );
       })}
-      <button onClick={() => setPageNamber((page) => page + 1)}>Prev</button>
-      <button onClick={() => setPageNamber((page) => page - 1)}>Next</button>
     </div>
   );
 };
