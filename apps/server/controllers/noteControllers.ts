@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { INotesSchema } from "../models/noteModel";
 import { IUser } from "../models/userModel";
 
-const Note = require("../models/noteModel");
+const Note = require("../models/noteModel") as mongoose.Model<INotesSchema>;
 
 // GET all notes
 interface INoteRequest {
@@ -19,8 +19,6 @@ export const getAllNotes = async (req: INoteRequest, res: Response) => {
   const page = req.query.page;
 
   const limit = 5;
-
-  console.log({ page });
 
   const notes = await Note.find({ userId })
     .sort({ date: -1 })

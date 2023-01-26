@@ -5,6 +5,7 @@ import styles from "./AuthForm.module.scss";
 import { Button } from "../Button";
 import { ClipLoader } from "react-spinners";
 import { Heading } from "../Heading";
+import { useEffect, useState } from "react";
 
 interface IAuthForm {
   onSubmit: (values: { email: string; password: string }) => void;
@@ -26,6 +27,18 @@ export const AuthForm = ({
   header,
   action = "Submit",
 }: IAuthForm) => {
+  const [theme, setTheme] = useState("");
+
+  const handleThemeSpinner = () => {
+    const getTheme = localStorage.getItem("theme");
+
+    if (getTheme === "dark") {
+      setTheme("black");
+    } else if (getTheme === "light") {
+      setTheme("white");
+    }
+  };
+
   return (
     <div className={styles["AuthForm"]}>
       <Heading level={2}>{header}</Heading>
@@ -46,8 +59,12 @@ export const AuthForm = ({
             type="password"
             placeholder="Enter your password"
           />
-          <Button disabled={isLoading ? isLoading : undefined} type="submit">
-            <ClipLoader loading={isLoading} color="white" size={12} />
+          <Button
+            disabled={isLoading ? isLoading : undefined}
+            type="submit"
+            onClick={() => handleThemeSpinner()}
+          >
+            <ClipLoader loading={isLoading} color={theme} size={12} />
             {action}
           </Button>
           {error && <p>{error}</p>}
