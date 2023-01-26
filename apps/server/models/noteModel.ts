@@ -11,7 +11,7 @@ type Tasks = {
 export interface INotesSchema {
   title: string;
   date: Date;
-  description: number;
+  description: string;
   tasks: Tasks[];
   userId: string;
 }

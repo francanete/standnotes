@@ -15,6 +15,7 @@ const whitelist = [
   "https://standnotes.com",
   "https://standnotes-dev.vercel.app",
 ];
+
 const corsOptions = {
   origin: function (origin: any, callback: any) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
@@ -26,14 +27,7 @@ const corsOptions = {
   credentials: true,
 };
 
-// Middleware
-
 app.use(express.json(), cors({ origin: "*" }));
-
-app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
 
 app.use("/api/notes", notesRoutes);
 app.use("/api/user", userRoutes);

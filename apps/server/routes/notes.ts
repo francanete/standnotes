@@ -15,6 +15,7 @@ const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
+// Require authentication for all routes: middleware function that runs before any route handler and checks if the user is authenticated
 router.use(requireAuth);
 
 // GET all notes

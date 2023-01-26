@@ -5,7 +5,6 @@ import { NextFunction, Request, Response } from "express";
 
 const requireAuth = async (req: any, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
-  console.log("authorization", authorization);
 
   if (!authorization) {
     return res.status(401).json({ error: "You must be logged in ONE" });
