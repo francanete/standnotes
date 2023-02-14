@@ -1,2 +1,0 @@
-Development
-MONGO_URI=mongodb+srv://frantastic:C4r4p3d0_@standnotes.zeb5vzb.mongodb.net/standnotes?retryWrites=true&w=majority
