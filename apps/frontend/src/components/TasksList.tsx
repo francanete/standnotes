@@ -41,7 +41,10 @@ export const TasksList = ({ note }: { note: INotes }) => {
             <Heading level={4}>{task.titleTask}</Heading>
             <ActionButtons
               // onDelete={() => console.log("delete")}
-              onDelete={() => setIsOpenConfirmation(true)}
+              onDelete={() => {
+                setIsOpenConfirmation(true);
+                setTaskId(task._id);
+              }}
               onEdit={() => handleEditTask(task._id, index)}
             />
           </div>
@@ -65,11 +68,13 @@ export const TasksList = ({ note }: { note: INotes }) => {
             setOpen={setIsOpen}
           />
           <ConfirmationModal
-            title="Delete Note"
+            title="Delete Task"
             isOpen={isOpenConfirmation}
             onClose={() => setIsOpenConfirmation(false)}
             setOpen={setIsOpenConfirmation}
-            onConfirm={() => handleDeleteTask(taskId)}
+            onConfirm={() => {
+              handleDeleteTask(taskId);
+            }}
           />
         </>
       )}

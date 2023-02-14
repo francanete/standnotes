@@ -1,5 +1,6 @@
 import { Modal, ModalProps } from "./Modal";
 import styles from "./ConfirmationModal.module.scss";
+import { Button } from "./Button";
 
 interface IConfirmationModal extends Omit<ModalProps, "children"> {
   setOpen: (open: boolean) => void;
@@ -11,9 +12,8 @@ export const ConfirmationModal = ({
   onClose,
   isOpen,
   onConfirm,
+  setOpen,
 }: IConfirmationModal) => {
-  console.log(isOpen);
-
   return (
     <Modal
       className={styles["ConfirmationModal"]}
@@ -21,8 +21,13 @@ export const ConfirmationModal = ({
       onClose={onClose}
       isOpen={isOpen}
     >
-      <p>Are you sure?</p>
-      <button onClick={onConfirm}>Yes</button>
+      <div className={styles["ConfirmationModal__content"]}>
+        <p>Do you really want to delete it?</p>
+        <div className={styles["ConfirmationModal__buttons"]}>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={onConfirm}>Delete</Button>
+        </div>
+      </div>
     </Modal>
   );
 };

@@ -5,7 +5,7 @@ export const useNoteDeleteMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(useDeleteNoteApiCall, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries("all-notes");
+      queryClient.invalidateQueries("notes").then();
     },
   });
 };
