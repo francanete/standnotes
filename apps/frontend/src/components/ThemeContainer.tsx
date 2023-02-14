@@ -23,7 +23,7 @@ export const ThemeContainer = ({
   };
 
   return (
-    <div className={styles["ThemeComtainer"]} {...rest} data-theme={theme}>
+    <div className={styles["ThemeContainer"]} {...rest} data-theme={theme}>
       <NavBar theme={theme} switchTheme={switchTheme} />
       {children}
       <MainFooter />

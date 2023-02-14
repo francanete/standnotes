@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IUser } from "../types/user";
 import { useAuthContext } from "./useAuthContext";
 import { BASE_URL } from "../env";

@@ -4,8 +4,8 @@ import { useDeleteTaskApiCall } from "../api/useDeleteTaskApiCall";
 export const useTaskDeleteMutation = (noteId: string) => {
   const queryClient = useQueryClient();
   return useMutation(useDeleteTaskApiCall, {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries(["note-detail", noteId]);
+    onSuccess: () => {
+      queryClient.invalidateQueries(["note-detail", noteId]).then();
     },
   });
 };

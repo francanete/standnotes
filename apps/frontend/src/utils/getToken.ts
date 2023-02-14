@@ -3,9 +3,7 @@ export const getToken = () => {
 
   const { token } = JSON.parse(getTokens!);
 
-  const config = {
+  return {
     headers: { Authorization: `Bearer ${token}` },
   };
-
-  return config;
 };

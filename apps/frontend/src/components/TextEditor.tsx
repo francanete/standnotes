@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
-import { convertToRaw, ContentState, EditorState } from "draft-js";
+import { ContentState, convertToRaw, EditorState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 
@@ -16,8 +16,7 @@ export const TextEditor = ({ value, setFieldValue }: ITextEditorProps) => {
   const prepareDraft = (value: string) => {
     const draft = htmlToDraft(value);
     const contentState = ContentState.createFromBlockArray(draft.contentBlocks);
-    const editorState = EditorState.createWithContent(contentState);
-    return editorState;
+    return EditorState.createWithContent(contentState);
   };
 
   const [editorState, setEditorState] = useState(

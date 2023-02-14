@@ -45,7 +45,7 @@ export const NoteCard = ({
         <Heading ellipsis level={isFeaturedNote ? 2 : 3}>
           {note.title}
         </Heading>
-        <Paragraph bold={isFeaturedNote ? true : false}>
+        <Paragraph bold={!!isFeaturedNote}>
           {getDayAndNumber(note.date)}
         </Paragraph>
         {isFeaturedNote ? (

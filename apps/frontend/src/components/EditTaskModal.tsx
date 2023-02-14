@@ -14,8 +14,6 @@ export const EditTaskModal = ({
   title,
   onClose,
   isOpen,
-  taskId,
-  noteId,
   taskIndex,
   tasks,
   setOpen,

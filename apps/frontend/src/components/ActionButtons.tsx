@@ -9,11 +9,7 @@ interface IActionButtons {
   alignRight?: boolean;
 }
 
-export const ActionButtons = ({
-  onDelete,
-  onEdit,
-  alignRight,
-}: IActionButtons) => {
+export const ActionButtons = ({ onDelete, onEdit }: IActionButtons) => {
   return (
     <div className={styles["ActionButtons"]}>
       <button className={styles["ActionButtons__button"]} onClick={onDelete}>

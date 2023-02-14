@@ -5,7 +5,7 @@ import styles from "./AuthForm.module.scss";
 import { Button } from "../Button";
 import { ClipLoader } from "react-spinners";
 import { Heading } from "../Heading";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface IAuthForm {
   onSubmit: (values: { email: string; password: string }) => void;
