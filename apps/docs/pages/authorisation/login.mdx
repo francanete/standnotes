@@ -1,0 +1,41 @@
+## Login
+
+This MERN app uses a combination of frontend and backend code to handle user login and token creation.
+
+The frontend code is a React hook called useLogin that is responsible for handling the login process. When the login function is called, it sends a POST request to the backend with the user's email and password as the request body. If the response from the backend is successful (HTTP status code 200), it parses the response as JSON and stores the JSON object in local storage as a "user" item. It also dispatches an action to the global context to update the state with the user's information. If the response is not successful (status code 400), it sets the error state to the error message returned by the backend.
+
+The backend code includes a createToken function that takes a user's `_id` as an argument and creates a JSON web token (JWT) using the jwt library. The JWT is signed with a secret key stored in an environment variable called `SECRET_JWT` and expires in 3 days.
+
+The loginUser function is an express.js route handler that is responsible for handling the login request from the frontend. It extracts the email and password from the request body and calls the User.login function, which attempts to find a user in the database with the given email and password. If the login is successful, it creates a token using the createToken function and returns the token and email as a JSON response. If the login is not successful, it returns a JSON response with an error message.
+
+Here is the code for the `createToken` function:
+
+```typescript
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.SECRET_JWT, {
+    expiresIn: 3 * 24 * 60 * 60,
+  });
+};
+```
+
+And here is the code for the `loginUser` function:
+
+```typescript
+export const loginUser = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.status(200).json({ email, token });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(400).json({ error: "Something went wrong" });
+    }
+  }
+};
+```
+
+The User.login function is not provided in the code so it is uncertain how it is implemented but it should retrieve the user data from the database and check for the email and password match.

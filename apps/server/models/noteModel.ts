@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Schemma = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 type Tasks = {
   _id?: string;
@@ -16,7 +16,7 @@ export interface INotesSchema {
   userId: string;
 }
 
-const noteSchema: INotesSchema = new Schemma(
+const noteSchema: INotesSchema = new Schema(
   {
     title: { type: String, required: true },
     date: { type: Date, required: true },

@@ -3,7 +3,15 @@ const User = require("../models/userModel");
 
 import { NextFunction, Request, Response } from "express";
 
-const requireAuth = async (req: any, res: Response, next: NextFunction) => {
+interface CustomRequest extends Request {
+  user: string;
+}
+
+const requireAuth = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
