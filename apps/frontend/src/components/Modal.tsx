@@ -1,9 +1,9 @@
 import React from "react";
 import { Heading } from "./Heading";
 import { IoClose } from "react-icons/io5";
+import classNames from "classnames";
 
 import styles from "./Modal.module.scss";
-import classNames from "classnames";
 export interface ModalProps {
   title: string;
   isOpen: boolean;

@@ -12,6 +12,8 @@ export const ConfirmationModal = ({
   isOpen,
   onConfirm,
 }: IConfirmationModal) => {
+  console.log(isOpen);
+
   return (
     <Modal
       className={styles["ConfirmationModal"]}

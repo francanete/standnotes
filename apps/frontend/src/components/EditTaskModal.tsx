@@ -3,8 +3,8 @@ import { UpdateTaskForm } from "./forms/UpdateTaskForm";
 import { Modal, ModalProps } from "./Modal";
 
 interface IEditTaskModal extends Omit<ModalProps, "children"> {
-  taskId: string;
-  noteId: string;
+  taskId?: string;
+  noteId?: string;
   taskIndex: number;
   tasks: Tasks[];
   setOpen: (open: boolean) => void;

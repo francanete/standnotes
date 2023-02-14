@@ -79,14 +79,12 @@ export const TaskForm = ({
   initialValues: typeof initialValuesSchema;
 }) => {
   return (
-    <>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {TaskFields}
-      </Formik>
-    </>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {TaskFields}
+    </Formik>
   );
 };

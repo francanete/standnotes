@@ -40,6 +40,7 @@ export const TasksList = ({ note }: { note: INotes }) => {
           <div className={styles["TasksList__header"]}>
             <Heading level={4}>{task.titleTask}</Heading>
             <ActionButtons
+              // onDelete={() => console.log("delete")}
               onDelete={() => setIsOpenConfirmation(true)}
               onEdit={() => handleEditTask(task._id, index)}
             />
@@ -51,13 +52,13 @@ export const TasksList = ({ note }: { note: INotes }) => {
         </div>
       ))}
 
-      {note.tasks && taskId && (
+      {note.tasks && (
         <>
           <EditTaskModal
             title="Update Task"
             onClose={() => setIsOpen(false)}
             isOpen={isOpen}
-            noteId={note._id!}
+            noteId={note._id}
             taskIndex={taskIndex}
             tasks={note.tasks}
             taskId={taskId}
