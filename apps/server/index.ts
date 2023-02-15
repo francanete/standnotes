@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const notesRoutes = require("./routes/notes");
 const userRoutes = require("./routes/user");
 require("dotenv").config();
+
 const app = express();
 
 app.use(express.json(), cors());
