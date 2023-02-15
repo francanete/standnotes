@@ -1,8 +1,13 @@
 import jwt from "jsonwebtoken";
+import { IUser } from "../models/userModel";
+
+require("dotenv").config();
+
+const { SECRET_JWT } = process.env;
 
 export const createToken = {
-  activation: (_id: string) => {
-    return jwt.sign({ _id }, process.env.SECRET_JWT as string, {
+  activation: (user: IUser) => {
+    return jwt.sign(user, SECRET_JWT as string, {
       expiresIn: "15m",
     });
   },
