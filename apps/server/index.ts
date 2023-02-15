@@ -9,6 +9,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json(), cors());
+express.urlencoded({ extended: true });
 
 app.use("/api/notes", notesRoutes);
 app.use("/api/user", userRoutes);
@@ -16,7 +17,6 @@ app.use("/api/user", userRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    // Listen for requests
     app.listen(process.env.PORT, () => {
       console.log(
         `[⚡️SERVER⚡️]: connected to DB and started on port ${process.env.PORT}`

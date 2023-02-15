@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createToken } from "../helpers/createToken";
+const sendMail = require("../helpers/sendMail");
 const User = require("../models/userModel");
 
 export const signupUser = async (req: Request, res: Response) => {
@@ -8,6 +9,10 @@ export const signupUser = async (req: Request, res: Response) => {
   try {
     const user = await User.signup(email, password);
     const token = createToken.activation(user._id);
+
+    const url = `http://localhost:3000/activate/${token}`;
+    await sendMail.sendEmailRegister(email, url, "Activate your account");
+
     res.status(200).json({ email, token });
   } catch (error) {
     if (error instanceof Error) {
