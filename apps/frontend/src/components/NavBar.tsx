@@ -22,13 +22,6 @@ export const NavBar = ({ theme, switchTheme }: INavBar) => {
   const path = useLocation().pathname;
   const isRoot = path === "/";
 
-  const menuItems = [
-    {
-      name: "Create",
-      path: "/note/create",
-    },
-  ];
-
   const handleLogout = () => {
     logout();
   };
@@ -39,17 +32,6 @@ export const NavBar = ({ theme, switchTheme }: INavBar) => {
         <Link to={"/"}>
           <Logo color={theme === "light" ? "#000" : "#fff"} />
         </Link>
-        {/* {user && (
-          <nav className={styles["NavBar__menu"]}>
-            <ul>
-              {menuItems.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path}>{item.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )} */}
         <div className={styles["NavBar__access"]}>
           {user ? (
             <>

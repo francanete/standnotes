@@ -13,7 +13,7 @@ export const useNoteUpdateMutation = (noteId: string) => {
     },
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(["note-detail", data.data._id]);
+        queryClient.invalidateQueries(["note-detail", data.data._id]).then();
       },
     }
   );

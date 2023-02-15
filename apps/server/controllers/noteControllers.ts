@@ -164,8 +164,6 @@ export const getTask = async (req: IGetTaskRequest, res: Response) => {
     return res.status(404).json({ error: "No such TASK exists" });
   }
 
-  const tasks = req.body.tasks;
-
   const getTask = await Note.find({ "tasks._id": taskId }).select({
     "tasks.$": 1,
   });

@@ -4,10 +4,7 @@
   &__wrapper {
     display: flex;
     align-items: center;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem 1.25rem;
     flex-direction: column;
 
     @media (min-width: 640px) {

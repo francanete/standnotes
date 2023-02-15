@@ -40,7 +40,11 @@ export const TasksList = ({ note }: { note: INotes }) => {
           <div className={styles["TasksList__header"]}>
             <Heading level={4}>{task.titleTask}</Heading>
             <ActionButtons
-              onDelete={() => setIsOpenConfirmation(true)}
+              // onDelete={() => console.log("delete")}
+              onDelete={() => {
+                setIsOpenConfirmation(true);
+                setTaskId(task._id);
+              }}
               onEdit={() => handleEditTask(task._id, index)}
             />
           </div>
@@ -51,24 +55,26 @@ export const TasksList = ({ note }: { note: INotes }) => {
         </div>
       ))}
 
-      {note.tasks && taskId && (
+      {note.tasks && (
         <>
           <EditTaskModal
             title="Update Task"
             onClose={() => setIsOpen(false)}
             isOpen={isOpen}
-            noteId={note._id!}
+            noteId={note._id}
             taskIndex={taskIndex}
             tasks={note.tasks}
             taskId={taskId}
             setOpen={setIsOpen}
           />
           <ConfirmationModal
-            title="Delete Note"
+            title="Delete Task"
             isOpen={isOpenConfirmation}
             onClose={() => setIsOpenConfirmation(false)}
             setOpen={setIsOpenConfirmation}
-            onConfirm={() => handleDeleteTask(taskId)}
+            onConfirm={() => {
+              handleDeleteTask(taskId);
+            }}
           />
         </>
       )}

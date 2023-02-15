@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Button } from "./Button";
 
 export const NotesGrid = () => {
-  const [pageNumber, setPageNamber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
   const { data: notes, isLoading } = useNotesQuery({ pageParam: pageNumber });
 
   if (isLoading) {
@@ -32,7 +32,7 @@ export const NotesGrid = () => {
         {pageNumber !== 0 ? (
           <Button
             disabled={pageNumber === 0}
-            onClick={() => setPageNamber((page) => page - 1)}
+            onClick={() => setPageNumber((page) => page - 1)}
             className={styles["NotesGrid__buttonBack"]}
           >
             Back
@@ -41,7 +41,7 @@ export const NotesGrid = () => {
         {!isLastPage ? (
           <Button
             disabled={isLastPage}
-            onClick={() => setPageNamber((page) => page + 1)}
+            onClick={() => setPageNumber((page) => page + 1)}
             className={styles["NotesGrid__buttonNext"]}
           >
             Next

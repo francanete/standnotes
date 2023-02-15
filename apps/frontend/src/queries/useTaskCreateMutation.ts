@@ -12,8 +12,8 @@ export const useTaskCreateMutation = (noteId: string) => {
       return axios.post(`${BASE_URL}/api/notes/tasks/${noteId}`, note, config);
     },
     {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["note-detail", noteId]);
+      onSuccess: () => {
+        queryClient.invalidateQueries(["note-detail", noteId]).then();
       },
     }
   );
