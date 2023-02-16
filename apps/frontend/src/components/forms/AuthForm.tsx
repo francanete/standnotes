@@ -75,7 +75,11 @@ export const AuthForm = ({
             name="password"
             id="password"
             type="password"
-            placeholder="Enter your password"
+            placeholder={
+              isConfirmPassword
+                ? "Enter again your password"
+                : "Enter your password"
+            }
           />
           <Button
             disabled={isLoading ? isLoading : undefined}

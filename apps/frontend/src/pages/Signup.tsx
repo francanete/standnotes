@@ -8,7 +8,7 @@ const validationSchema = Yup.object({
   unconfirmedPassword: Yup.string().min(6, "Too Short!").required("Required"),
   password: Yup.string().oneOf(
     [Yup.ref("unconfirmedPassword"), null],
-    "Passwords must match"
+    "Passwords must match!"
   ),
 });
 
@@ -22,7 +22,7 @@ export const Signup = () => {
   return (
     <AuthForm
       header="Create an account to get started"
-      action="Get started"
+      action="Register"
       onSubmit={onSubmit}
       isLoading={isLoading}
       error={error}
