@@ -11,12 +11,13 @@ export const signupUser = {
 
     try {
       const user: IUser = await User.signup(email, password);
-      const token = createToken.activation(user);
+      const tokenActivation = createToken.activation(user);
 
-      const url = `http://localhost:3000/activate/${token}`;
+      // TODO: add BASE_URL to the activation link on the BE
+      const url = `http://localhost:3000/activation/${tokenActivation}`;
       await sendMail.sendEmailRegister(email, url, "Activate your account");
 
-      res.status(200).json({ email, token });
+      res.status(200).json({ email, tokenActivation });
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
@@ -24,23 +25,31 @@ export const signupUser = {
     }
   },
 
-  activate: async (req: Request, res: Response) => {
+  activate: async (
+    req: {
+      body: { tokenActivation: string };
+    },
+    res: Response
+  ) => {
     try {
-      const { token } = req.body;
+      const { tokenActivation } = req.body;
 
-      const user = jwt.verify(token, process.env.SECRET_JWT as string);
+      const user = jwt.verify(
+        tokenActivation,
+        process.env.SECRET_JWT as string
+      );
       const { email, password } = user as IUser;
 
-      const check = await User.findOne({ email });
+      const isExistingUser = await User.findOne({ email });
 
-      if (check)
-        return res.status(400).json({ msg: "This email already exists" });
+      if (isExistingUser)
+        return res.status(400).json({ error: "This email already exists" });
 
       const newUser = new User({ email, password });
 
       await newUser.save();
 
-      res.status(200).json({ msg: "Account has been activated!" });
+      res.status(200).json(user);
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
