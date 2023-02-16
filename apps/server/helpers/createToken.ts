@@ -11,4 +11,9 @@ export const createToken = {
       expiresIn: "15m",
     });
   },
+  login: (_id: string) => {
+    return jwt.sign({ _id }, SECRET_JWT as string, {
+      expiresIn: "7d",
+    });
+  },
 };
