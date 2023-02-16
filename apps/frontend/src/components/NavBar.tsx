@@ -42,7 +42,7 @@ export const NavBar = ({ theme, switchTheme }: INavBar) => {
             </>
           ) : (
             <>
-              <Link to={"/signup"}>Get Started</Link>
+              <Link to={"/signup"}>Register</Link>
               <Link to={"/login"}>
                 <Button>Log in</Button>
               </Link>
