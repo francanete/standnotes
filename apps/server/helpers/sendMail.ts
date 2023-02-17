@@ -49,7 +49,7 @@ const sendEmailRegister = async (to: string, url: string, text: string) => {
               href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
               rel="stylesheet"
             />
-            <title>Passioncorners | Account Activation</title>
+            <title>StandNotes | Account Activation</title>
             <style>
               body {
                 background-color: #333333;
