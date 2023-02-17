@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { Form, Formik } from "formik";
 import { FieldInput } from "../FieldInput";
-
-import styles from "./AuthForm.module.scss";
 import { Button } from "../Button";
 import { ClipLoader } from "react-spinners";
 import { Heading } from "../Heading";
-import { useState } from "react";
+import styles from "./AuthForm.module.scss";
+import { ObjectSchema } from "yup";
 
 interface IAuthForm {
   onSubmit: (values: { email: string; password: string }) => void;
@@ -13,6 +13,8 @@ interface IAuthForm {
   isLoading: boolean;
   header: string;
   action?: string;
+  isConfirmPassword?: boolean;
+  validationSchema?: ObjectSchema<any | undefined>;
 }
 
 const initialValues = {
@@ -26,6 +28,8 @@ export const AuthForm = ({
   error,
   header,
   action = "Submit",
+  isConfirmPassword,
+  validationSchema,
 }: IAuthForm) => {
   const [theme, setTheme] = useState("");
 
@@ -42,7 +46,11 @@ export const AuthForm = ({
   return (
     <div className={styles["AuthForm"]}>
       <Heading level={2}>{header}</Heading>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
         <Form className={styles["AuthForm__form"]}>
           <FieldInput
             label="Email"
@@ -52,12 +60,26 @@ export const AuthForm = ({
             placeholder="Enter your email"
           />
 
+          {isConfirmPassword && (
+            <FieldInput
+              label="Password"
+              name="unconfirmedPassword"
+              id="unconfirmedPassword"
+              type="password"
+              placeholder="Enter your password"
+            />
+          )}
+
           <FieldInput
-            label="Password"
+            label={isConfirmPassword ? "Confirm your password" : `Password`}
             name="password"
             id="password"
             type="password"
-            placeholder="Enter your password"
+            placeholder={
+              isConfirmPassword
+                ? "Enter again your password"
+                : "Enter your password"
+            }
           />
           <Button
             disabled={isLoading ? isLoading : undefined}

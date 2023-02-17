@@ -34,18 +34,18 @@ UserSchema.statics.signup = async function (email, password) {
     throw Error("Please provide a strong password");
   }
 
-  const exists: IUser = await this.findOne({ email });
+  const userExists: IUser = await this.findOne({ email });
 
-  if (exists) {
+  if (userExists) {
     throw new Error("User already exists");
   }
 
   const salt = await bcrypt.genSalt(15);
   const hash = await bcrypt.hash(password, salt);
 
-  const user: IUser = await this.create({ email, password: hash });
+  // const user: IUser = await this.create({ email, password: hash });
 
-  return user;
+  return { email, password: hash } as IUser;
 };
 
 UserSchema.statics.login = async function (email: string, password: string) {
