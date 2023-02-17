@@ -115,12 +115,16 @@ const sendEmailRegister = async (to: string, url: string, text: string) => {
         `,
   };
 
-  smtpTransport.sendMail(mailOptions, (error: Error, info: any) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
+  await new Promise((resolve, reject) => {
+    smtpTransport.sendMail(mailOptions, (error: Error, info: any) => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        resolve(info);
+      }
+    });
   });
 };
 
