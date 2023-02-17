@@ -4,12 +4,13 @@ export function useActivation(activationToken: string | undefined) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  return async () => {
+  const activate = async () => {
     try {
       const response: Response = await fetch(
-        //   TODO: update BASE_URL for the server
-        `http://localhost:8000/api/user/activate`,
+        `${process.env.REACT_APP_BASE_URL}/api/user/activate`,
         {
           method: "POST",
           headers: {
@@ -26,15 +27,18 @@ export function useActivation(activationToken: string | undefined) {
         isSuccess,
         error: null as string | null,
         successMessage: "",
+        errorMessage: "",
       };
 
       if (!response.ok) {
         setIsLoading(false);
         setIsError(true);
+        setErrorMessage(json.error);
         data.error = `Something went wrong: ${json.error}`;
       } else {
         setIsSuccess(true);
         setIsLoading(false);
+        setSuccessMessage("Account activated");
         data.successMessage = "Account activated";
       }
 
@@ -46,5 +50,14 @@ export function useActivation(activationToken: string | undefined) {
         return `Something went wrong: ${error}`;
       }
     }
+  };
+
+  return {
+    activate,
+    isLoading,
+    isError,
+    isSuccess,
+    errorMessage,
+    successMessage,
   };
 }

@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { IUser } from "../types/user";
-import { useAuthContext } from "./useAuthContext";
 import { BASE_URL } from "../env";
-import { setUser } from "./util";
 
 export const useSignup = () => {
-  const [error, setError] = useState<boolean | null>(null);
+  const [isError, setError] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { dispatch } = useAuthContext();
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
 
   const signup = async ({ email, password }: IUser) => {
     setIsLoading(true);
@@ -23,8 +21,17 @@ export const useSignup = () => {
       body: JSON.stringify({ email, password }),
     });
 
-    await setUser(response, setError, setIsLoading, dispatch);
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+      setIsLoading(false);
+    }
+    if (response.ok) {
+      setIsLoading(false);
+      setIsSuccess(true);
+    }
   };
 
-  return { signup, error, isLoading };
+  return { signup, isError, isLoading, isSuccess };
 };

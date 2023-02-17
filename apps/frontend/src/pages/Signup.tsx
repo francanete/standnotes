@@ -13,11 +13,21 @@ const validationSchema = Yup.object({
 });
 
 export const Signup = () => {
-  const { signup, error, isLoading } = useSignup();
+  const { signup, isError, isLoading, isSuccess } = useSignup();
 
   const onSubmit = async (values: IUser) => {
     await signup(values);
   };
+
+  if (isSuccess) {
+    return (
+      //   TODO: create a decent success component or/and toast message
+      <span>
+        <h1>Success!</h1>
+        <p>Check your email for a confirmation link.</p>
+      </span>
+    );
+  }
 
   return (
     <AuthForm
@@ -25,7 +35,7 @@ export const Signup = () => {
       action="Register"
       onSubmit={onSubmit}
       isLoading={isLoading}
-      error={error}
+      error={isError}
       isConfirmPassword={true}
       validationSchema={validationSchema}
     />

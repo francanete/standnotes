@@ -2,7 +2,7 @@ import { IUser } from "../types/user";
 import { useLogin } from "../hooks/useLogin";
 import { AuthForm } from "../components/forms/AuthForm";
 import * as Yup from "yup";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useActivation } from "../hooks/useActivation";
 
@@ -14,27 +14,42 @@ const validationSchema = Yup.object({
 export const Activation = () => {
   const { login, error, isLoading } = useLogin();
   const { activationToken } = useParams();
+  const nav = useNavigate();
 
-  const verifyToken = useActivation(activationToken);
+  const {
+    activate,
+    isSuccess,
+    errorMessage,
+    isError,
+    isLoading: confirmationIsLoading,
+  } = useActivation(activationToken);
 
   useEffect(() => {
-    verifyToken().then((data) => {
-      console.log(data);
-    });
-  });
+    activate().then((data) => {});
+  }, []);
 
   const onSubmit = async (values: IUser) => {
     await login(values);
   };
 
+  if (isSuccess) {
+    nav("/login");
+  }
+
   return (
-    <AuthForm
-      header="Log in to continue"
-      action="Log in"
-      onSubmit={onSubmit}
-      isLoading={isLoading}
-      error={error}
-      validationSchema={validationSchema}
-    />
+    <>
+      {isError ? (
+        <span>
+          <h1>Error!</h1>
+          <p>Something went wrong.</p>
+          <p>{errorMessage}</p>
+        </span>
+      ) : (
+        <span>
+          <h1>Success!</h1>
+          <p>You can now log in.</p>
+        </span>
+      )}
+    </>
   );
 };
