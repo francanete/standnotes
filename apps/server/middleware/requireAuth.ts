@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from "express";
 
 interface CustomRequest extends Request {
   user: string;
+  userId: string;
 }
 
 const requireAuth = async (
@@ -23,6 +24,8 @@ const requireAuth = async (
     const { _id } = jwt.verify(token, process.env.SECRET_JWT);
 
     req.user = await User.findOne({ _id }).select("_id");
+    req.userId = _id;
+
     next();
   } catch (error) {
     console.log(error);
