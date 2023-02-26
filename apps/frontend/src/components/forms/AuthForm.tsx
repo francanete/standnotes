@@ -4,8 +4,9 @@ import { FieldInput } from "../FieldInput";
 import { Button } from "../Button";
 import { ClipLoader } from "react-spinners";
 import { Heading } from "../Heading";
-import styles from "./AuthForm.module.scss";
 import { ObjectSchema } from "yup";
+
+import styles from "./AuthForm.module.scss";
 
 interface IAuthForm {
   onSubmit: (values: { email: string; password: string }) => void;

@@ -20,18 +20,8 @@ export const Signup = () => {
     await signup(values);
   };
 
-  if (!isSuccess) {
-    return (
-      //   TODO: create a decent success component or/and toast message
-      <>
-        <span>
-          <h1>Success!</h1>
-          <p>Check your email for a confirmation link.</p>
-        </span>
-
-        <AlertComponent header="Success!" />
-      </>
-    );
+  if (isSuccess) {
+    return <AlertComponent status="success" header="Success!" />;
   }
 
   return (
