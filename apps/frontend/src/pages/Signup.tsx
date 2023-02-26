@@ -2,6 +2,7 @@ import { IUser } from "../types/user";
 import { useSignup } from "../hooks/useSignup";
 import { AuthForm } from "../components/forms/AuthForm";
 import * as Yup from "yup";
+import { AlertComponent } from "../components/AlertComponent";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -19,13 +20,17 @@ export const Signup = () => {
     await signup(values);
   };
 
-  if (isSuccess) {
+  if (!isSuccess) {
     return (
       //   TODO: create a decent success component or/and toast message
-      <span>
-        <h1>Success!</h1>
-        <p>Check your email for a confirmation link.</p>
-      </span>
+      <>
+        <span>
+          <h1>Success!</h1>
+          <p>Check your email for a confirmation link.</p>
+        </span>
+
+        <AlertComponent header="Success!" />
+      </>
     );
   }
 
