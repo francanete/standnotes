@@ -19,7 +19,7 @@ const renderStatusIcon = (status: string) => {
   } else if (status === "error") {
     return <MdOutlineReportGmailerrorred size={24} />;
   } else {
-    <TbAlertTriangle size={24} />;
+    return <TbAlertTriangle size={24} />;
   }
 };
 

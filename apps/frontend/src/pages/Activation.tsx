@@ -1,6 +1,5 @@
 import { IUser } from "../types/user";
 import { useLogin } from "../hooks/useLogin";
-import { AuthForm } from "../components/forms/AuthForm";
 import * as Yup from "yup";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -12,7 +11,7 @@ const validationSchema = Yup.object({
 });
 
 export const Activation = () => {
-  const { login, error, isLoading } = useLogin();
+  const { login } = useLogin();
   const { activationToken } = useParams();
   const nav = useNavigate();
 
@@ -26,7 +25,7 @@ export const Activation = () => {
 
   useEffect(() => {
     activate().then((data) => {});
-  }, []);
+  });
 
   const onSubmit = async (values: IUser) => {
     await login(values);
