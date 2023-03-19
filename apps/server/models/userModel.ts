@@ -7,6 +7,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   // _id: string;
+  // avatar: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -18,6 +19,9 @@ const UserSchema: Schema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  avatar: {
+    type: String,
   },
 });
 
@@ -64,6 +68,25 @@ UserSchema.statics.login = async function (email: string, password: string) {
   if (!match) {
     throw new Error("Incorrect password");
   }
+
+  return user;
+};
+
+UserSchema.statics.update = async function (id: string, avatar: string) {
+  if (!id || !avatar) {
+    throw Error("Please provide id and avatar");
+  }
+
+  const user: IUser = await this.findOneAndUpdate(
+    { _id: id },
+    { avatar: avatar }
+  );
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // user.avatar = avatar;
 
   return user;
 };

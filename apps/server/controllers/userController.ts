@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { createToken } from "../helpers/createToken";
 import jwt from "jsonwebtoken";
 import { IUser } from "../models/userModel";
 const sendMail = require("../helpers/sendMail");
 const User = require("../models/userModel");
 
-export const signupUser = {
+export const userController = {
   register: async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
@@ -55,20 +55,46 @@ export const signupUser = {
       }
     }
   },
-};
 
-export const loginUser = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  login: async (req: Request, res: Response) => {
+    const { email, password } = req.body;
 
-  try {
-    const user = await User.login(email, password);
-    const token = createToken.login(user._id);
-    res.status(200).json({ email, token });
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).json({ error: error.message });
+    try {
+      const user = await User.login(email, password);
+      const token = createToken.login(user._id);
+      res.status(200).json({ email, token });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      }
     }
-  }
+  },
+
+  update: async (
+    req: {
+      file: { path: string };
+      userId: string;
+    },
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const userId = req.userId;
+
+      if (req.file) {
+        const avatarUrl = req.file.path;
+
+        const user = await User.findByIdAndUpdate(
+          userId,
+          { avatar: avatarUrl },
+          { new: true }
+        );
+        res.json(user);
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
-module.exports = { loginUser, signupUser };
+module.exports = { userController };
